@@ -3,24 +3,38 @@
    ========================================================= */
 
 .home-hero {
-  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100vh - var(--topbar-h) - 74px);
+  margin-top: var(--topbar-h);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 60px 24px;
-  background: linear-gradient(160deg, #f7fbff 0%, #eef3f8 100%);
+  padding: 72px 24px;
+  background:
+    radial-gradient(900px 420px at 50% -10%, rgba(249, 115, 22, .10), transparent 70%),
+    linear-gradient(170deg, #ffffff 0%, var(--color-bg-soft) 100%);
 }
 
 .home-hero h1 {
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   font-size: clamp(32px, 6vw, 56px);
   letter-spacing: -0.5px;
 }
 
-.home-hero p {
-  margin: 0 0 32px;
+/* Gạch chân cam nhỏ dưới tiêu đề */
+.home-hero h1::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin: 18px auto 0;
+  background: var(--color-orange);
+  border-radius: 2px;
+}
+
+.home-hero > p {
+  margin: 0 0 40px;
   max-width: 560px;
   color: var(--color-muted);
   font-size: 18px;
@@ -29,33 +43,52 @@
 .home-doc-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 18px;
   justify-content: center;
 }
 
 .home-doc-card {
   display: block;
-  width: 280px;
-  padding: 20px;
+  width: 320px;
+  padding: 22px;
   text-align: left;
   background: #fff;
   border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-orange);
   border-radius: var(--radius);
-  text-decoration: none;
-  transition: box-shadow .15s ease, transform .15s ease;
+  transition: box-shadow .18s ease, transform .18s ease;
 }
 .home-doc-card:hover {
-  text-decoration: none;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(35, 48, 61, .08);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(10, 25, 49, .1);
+}
+.home-doc-card .tag {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 2px 9px;
+  border-radius: 20px;
+  background: var(--color-orange-tint);
+  color: var(--color-orange-dark);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .4px;
 }
 .home-doc-card strong {
   display: block;
   margin-bottom: 6px;
-  color: var(--color-primary-dark);
-  font-size: 17px;
+  font-family: var(--font-serif);
+  color: var(--color-navy);
+  font-size: 19px;
 }
-.home-doc-card span {
+.home-doc-card .desc {
+  color: var(--color-muted);
+  font-size: 14.5px;
+}
+
+.home-footer {
+  border-top: 1px solid var(--color-border);
+  padding: 26px 24px;
+  text-align: center;
   color: var(--color-muted);
   font-size: 14px;
 }

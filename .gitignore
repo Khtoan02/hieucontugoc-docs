@@ -1,3 +1,7 @@
 .DS_Store
 Thumbs.db
 node_modules/
+
+# Bản clone trang docs.autismspeaks.org — chỉ dùng để tham khảo bố cục ở máy
+# local, không đưa lên repo (ảnh và nội dung thuộc bản quyền Autism Speaks).
+docs.autismspeaks.org/

@@ -2,23 +2,29 @@
 
 Trang tài liệu tĩnh, thuần HTML/CSS/JS — không cần build, mở file là chạy.
 
+- **Bố cục** dựng theo docs.autismspeaks.org: top bar mỏng (logo · ☰ · số trang),
+  menu ☰ mở lưới toàn bộ trang, trang bìa ảnh nền full màn hình chia 2 cột,
+  nút mũi tên trước/sau nổi ở góc dưới bên phải.
+- **Màu sắc & font** lấy theo hieucontugoc.online: navy `#0A1931`, cam `#F97316`,
+  chữ Lora (tiêu đề) + Nunito (nội dung).
+
 ## Cấu trúc thư mục
 
 ```
 index.html                     Trang chủ tổng thể ("Welcome to Hieucontugoc")
 assets/
   css/
-    base.css                   Reset, biến màu, header/footer/nút dùng chung
-    home.css                   Riêng cho trang chủ
+    base.css                   Biến màu, font, top bar, menu ☰, mũi tên, nút
+    home.css                   Riêng trang chủ
     doc.css                    Trang bìa tài liệu + trang nội dung con
   js/
-    doc-layout.js              Dựng mục lục, sidebar, nút trước/sau
+    doc-layout.js              Tự chèn top bar, menu ☰, mũi tên; dựng mục lục
   img/
-    cover.svg                  Ảnh bìa mặc định
+    cover.svg                  Ảnh nền trang bìa mặc định
 docs/
   tai-lieu-mau/                Một thư mục = một bộ tài liệu
-    data.js                    Khai báo mục lục của tài liệu này
-    index.html                 Trang bìa (ảnh + tiêu đề bên trái, mục lục bên phải)
+    data.js                    Khai báo danh sách trang + mục lục
+    index.html                 Trang bìa
     pages/                     Các trang nội dung con
       01-gioi-thieu.html
       ...
@@ -26,26 +32,37 @@ docs/
 
 ## Chạy thử
 
-Mở thẳng `index.html` bằng trình duyệt, hoặc chạy một server tĩnh:
-
 ```bash
 python3 -m http.server 8000
 ```
 
 Rồi vào http://localhost:8000
 
-## Thêm / sửa nội dung
+## Sửa nội dung
 
-**Đổi mục lục:** sửa `docs/tai-lieu-mau/data.js`. Trang bìa và sidebar của
-tất cả trang con tự cập nhật theo — không phải sửa từng file HTML.
+**Toàn bộ điều hướng nằm trong một file: `docs/tai-lieu-mau/data.js`.**
+
+- `pages` — thứ tự thật của tài liệu. Quyết định số trang (`06 / 11`),
+  nội dung menu ☰ và nút trước/sau.
+- `toc` — mục lục hiển thị ở trang bìa: nhãn chương (bấm được) + các dòng
+  nội dung nhỏ bên dưới.
+- `cover` — ảnh nền trang bìa. `pdf` — link tải PDF, để trống thì nút tự ẩn.
+
+Sửa file này là trang bìa và cả 10 trang con tự cập nhật theo, không phải
+sờ vào từng file HTML.
 
 **Thêm một trang con:**
 1. Copy một file bất kỳ trong `pages/` thành file mới.
-2. Sửa `data-page="pages/ten-file-moi.html"` trong thẻ `<body>` cho khớp tên file.
-3. Thêm một dòng `{ title: "...", file: "pages/ten-file-moi.html" }` vào `data.js`.
+2. Sửa `data-page="pages/ten-file-moi.html"` ở thẻ `<body>` cho khớp tên file.
+3. Thêm một dòng vào `pages` (và `toc` nếu muốn hiện ở trang bìa) trong `data.js`.
 4. Viết nội dung trong khối `<main class="doc-content">`.
 
-**Thêm một bộ tài liệu mới:** copy cả thư mục `docs/tai-lieu-mau/` sang tên
-mới, sửa `data.js`, rồi thêm một thẻ `.home-doc-card` ở `index.html`.
+**Thêm một bộ tài liệu mới:** copy cả thư mục `docs/tai-lieu-mau/` sang tên mới,
+sửa `data.js`, rồi thêm một thẻ `.home-doc-card` ở `index.html`.
 
-**Đổi màu sắc:** sửa các biến ở đầu `assets/css/base.css`.
+**Đổi màu:** sửa các biến ở đầu `assets/css/base.css`.
+
+## Phím tắt
+
+- `←` / `→` — lật trang trước / sau
+- `Esc` — đóng menu ☰
