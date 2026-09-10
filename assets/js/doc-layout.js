@@ -169,4 +169,15 @@
       nextCard.remove();
     }
   }
+
+  /* =======================================================
+     5. Vercel Web Analytics
+     ======================================================= */
+  if (!window.va) {
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    var vaScript = document.createElement("script");
+    vaScript.defer = true;
+    vaScript.src = "/_vercel/insights/script.js";
+    document.head.appendChild(vaScript);
+  }
 })();
