@@ -193,18 +193,39 @@
   display: none !important;
 }
 
-/* --- Khối tiêu đề trang: thanh điều hướng tối giản + H1 --- */
+/* --- Khối tiêu đề trang: có ảnh nền phủ, lớp kính mờ dịu mắt, H1 và thanh điều hướng --- */
 .doc-page-head {
-  max-width: var(--content-width);
-  margin: 0 auto;
-  padding: 56px 24px 0;
-  background: transparent;
-  border-bottom: none;
+  position: relative;
+  width: 100%;
+  padding: 64px 24px 48px;
+  background-color: #f1f5f9;
+  background-image: var(--page-head-image, url("/assets/img/2.jpg"));
+  background-size: cover;
+  background-position: center 30%;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* Lớp phủ mềm nhẹ kính mờ giúp chữ tương phản cao, êm mắt */
+.doc-page-head::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(255, 255, 255, 0.95) 100%
+  );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
 }
 
 .doc-page-head .inner {
-  max-width: 100%;
-  margin: 0;
+  position: relative;
+  z-index: 1;
+  max-width: var(--content-width);
+  margin: 0 auto;
 }
 
 /* Thanh tiện ích / điều hướng tối thiểu ở đầu */
@@ -249,11 +270,11 @@
   user-select: none;
 }
 
-/* Tiêu đề H1 lớn, đặt thẳng hàng trái, phẳng, không trang trí rườm rà */
+/* Tiêu đề H1 lớn, đặt thẳng hàng trái */
 .doc-page-head h1 {
-  margin: 0 0 30px;
+  margin: 0;
   font-family: var(--font-sans);
-  font-size: clamp(32px, 3.8vw, 44px);
+  font-size: clamp(30px, 3.8vw, 42px);
   font-weight: 800;
   color: var(--text-primary);
   line-height: 1.25;
@@ -261,12 +282,8 @@
   text-align: left;
 }
 
-/* Đường kẻ ngang mảnh, nhạt phân tách tiêu đề và nội dung */
 .doc-page-divider {
-  border: 0;
-  height: 1px;
-  background: var(--border);
-  margin: 0;
+  display: none;
 }
 
 /* --- Nội dung đọc một cột trải dài theo chiều dọc --- */

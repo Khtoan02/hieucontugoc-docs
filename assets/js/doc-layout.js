@@ -189,6 +189,10 @@
     /* Trang con: điền thanh tiện ích trên đầu và điều hướng hai cột ở cuối */
     var head = document.querySelector(".doc-page-head");
     if (head && index > -1) {
+      /* Thiết lập ảnh nền cho header trang con */
+      var headImg = (pages[index] && pages[index].image) || (data && data.cover) || "/assets/img/2.jpg";
+      head.style.setProperty("--page-head-image", 'url("' + headImg + '")');
+
       var inner = head.querySelector(".inner");
       if (inner) {
         var metaEl = inner.querySelector(".doc-page-meta");
