@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hieucontugoc — Tài liệu</title>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/home.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">hieu<span>contugoc</span></a>
+    <div class="spacer"></div>
+  </header>
+
+  <main class="home-hero">
+    <h1>Welcome to Hieucontugoc</h1>
+    <p>Nơi tập hợp các bộ tài liệu hướng dẫn. Chọn một tài liệu bên dưới để bắt đầu.</p>
+
+    <!-- Thêm tài liệu mới: copy thẻ <a> này và trỏ tới thư mục tài liệu tương ứng -->
+    <div class="home-doc-list">
+      <a class="home-doc-card" href="docs/tai-lieu-mau/index.html">
+        <strong>Tài liệu mẫu</strong>
+        <span>Bộ tài liệu hướng dẫn dành cho người mới bắt đầu.</span>
+      </a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    © <span id="year"></span> Hieucontugoc
+  </footer>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

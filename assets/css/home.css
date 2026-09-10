@@ -1,0 +1,61 @@
+/* =========================================================
+   home.css — trang chủ tổng thể (Welcome)
+   ========================================================= */
+
+.home-hero {
+  min-height: calc(100vh - var(--header-h));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+  background: linear-gradient(160deg, #f7fbff 0%, #eef3f8 100%);
+}
+
+.home-hero h1 {
+  margin: 0 0 12px;
+  font-size: clamp(32px, 6vw, 56px);
+  letter-spacing: -0.5px;
+}
+
+.home-hero p {
+  margin: 0 0 32px;
+  max-width: 560px;
+  color: var(--color-muted);
+  font-size: 18px;
+}
+
+.home-doc-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.home-doc-card {
+  display: block;
+  width: 280px;
+  padding: 20px;
+  text-align: left;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: box-shadow .15s ease, transform .15s ease;
+}
+.home-doc-card:hover {
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(35, 48, 61, .08);
+}
+.home-doc-card strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-primary-dark);
+  font-size: 17px;
+}
+.home-doc-card span {
+  color: var(--color-muted);
+  font-size: 14px;
+}

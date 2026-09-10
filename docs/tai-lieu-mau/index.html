@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tài liệu mẫu — Hieucontugoc</title>
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/doc.css">
+</head>
+<body data-doc-base="">
+
+  <header class="site-header">
+    <a class="brand" href="../../index.html">hieu<span>contugoc</span></a>
+    <div class="crumb" data-crumb></div>
+    <div class="spacer"></div>
+  </header>
+
+  <main class="doc-cover">
+    <!-- Cột trái: ảnh bìa + tiêu đề -->
+    <section class="cover-visual">
+      <h1 data-doc-title>Tài liệu</h1>
+      <div class="cover-actions">
+        <a class="btn" href="#muc-luc">Xem mục lục</a>
+        <a class="btn" data-pdf-link href="#">Tải bản PDF tại đây</a>
+      </div>
+    </section>
+
+    <!-- Cột phải: mục lục, do doc-layout.js dựng từ data.js -->
+    <section class="cover-toc" id="muc-luc">
+      <h2>Nội dung tài liệu:</h2>
+      <div data-toc></div>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="../../assets/js/doc-layout.js"></script>
+</body>
+</html>
