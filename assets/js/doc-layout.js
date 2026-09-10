@@ -21,11 +21,16 @@
   var current = body.getAttribute("data-page") || "index.html";
   var siteRoot = base + "../";
   var pages = data.pages || [];
-  var index = pages.findIndex(function (p) { return p.file === current; });
+  var index = pages.findIndex(function (p) {
+    var pf = (p.file || "").replace(/\.html$/, "");
+    var cf = current.replace(/\.html$/, "");
+    return pf === cf || (pf === "index" && (cf === "index" || cf === "index.html"));
+  });
 
   function href(file) {
-    if (file === "index.html") return base || "./";
-    return base + file;
+    var f = (file || "").replace(/\.html$/, "");
+    if (!f || f === "index") return base || "./";
+    return base + f;
   }
   function pad(n) { return (n < 10 ? "0" : "") + n; }
 
@@ -43,7 +48,7 @@
   var topbar = document.createElement("header");
   topbar.className = "topbar";
   topbar.innerHTML =
-    '<a class="brand" href="' + siteRoot + '">hiểu con <em>từ gốc</em></a>' +
+    '<a class="brand" href="' + siteRoot + '">HIỂU CON <em>TỪ GỐC</em></a>' +
     '<span class="divider"></span>' +
     '<button class="menu-btn" type="button" aria-label="Danh sách trang" aria-expanded="false">' + ICON.menu + "</button>" +
     '<span class="divider"></span>' +

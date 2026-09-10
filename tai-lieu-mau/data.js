@@ -7,7 +7,7 @@
 window.DOC_DATA = {
   title: "Bộ tài liệu 100 ngày dành cho ba mẹ",
   /* Ảnh nền trang bìa — thay bằng ảnh của bạn trong assets/img/ */
-  cover: "../assets/img/2.jpg",
+  cover: "/assets/img/2.jpg",
   /* Link tải PDF; để trống "" thì nút sẽ tự ẩn */
   pdf: "",
 
@@ -17,18 +17,18 @@ window.DOC_DATA = {
      trước/sau. Trang bìa luôn là mục đầu tiên.
      --------------------------------------------------------- */
   pages: [
-    { title: "Trang bìa",                  file: "index.html" },
-    { title: "Giới thiệu",                 file: "pages/01-gioi-thieu.html" },
-    { title: "Hiểu con từ gốc",            file: "pages/02-hieu-con.html" },
-    { title: "Dấu hiệu và biểu hiện",      file: "pages/03-dau-hieu.html" },
-    { title: "Hiểu hành vi của con",       file: "pages/04-phat-trien.html" },
-    { title: "Đồng hành cùng con",         file: "pages/05-dong-hanh.html" },
-    { title: "Phương pháp hỗ trợ",         file: "pages/06-ho-tro.html" },
-    { title: "Quyền lợi và nhà trường",    file: "pages/07-nha-truong.html" },
-    { title: "Cuộc sống hằng ngày",        file: "pages/08-cuoc-song.html" },
-    { title: "Kế hoạch 100 ngày",          file: "pages/09-ke-hoach.html" },
-    { title: "Thuật ngữ",                  file: "pages/10-thuat-ngu.html" },
-    { title: "Nguồn tài liệu & Lời cảm ơn", file: "pages/acknowledgments.html" }
+    { title: "Trang bìa",                  file: "index" },
+    { title: "Giới thiệu",                 file: "01-gioi-thieu" },
+    { title: "Hiểu con từ gốc",            file: "02-hieu-con" },
+    { title: "Dấu hiệu và biểu hiện",      file: "03-dau-hieu" },
+    { title: "Hiểu hành vi của con",       file: "04-phat-trien" },
+    { title: "Đồng hành cùng con",         file: "05-dong-hanh" },
+    { title: "Phương pháp hỗ trợ",         file: "06-ho-tro" },
+    { title: "Quyền lợi và nhà trường",    file: "07-nha-truong" },
+    { title: "Cuộc sống hằng ngày",        file: "08-cuoc-song" },
+    { title: "Kế hoạch 100 ngày",          file: "09-ke-hoach" },
+    { title: "Thuật ngữ",                  file: "10-thuat-ngu" },
+    { title: "Nguồn tài liệu & Lời cảm ơn", file: "acknowledgments" }
   ],
 
   /* ---------------------------------------------------------
@@ -40,57 +40,57 @@ window.DOC_DATA = {
   toc: [
     {
       label: "1. Giới thiệu",
-      file: "pages/01-gioi-thieu.html",
+      file: "01-gioi-thieu",
       topics: ["Tài liệu này dành cho ai?", "Cách sử dụng tài liệu", "Ba mẹ không đơn độc"]
     },
     {
       label: "2. Hiểu con từ gốc",
-      file: "pages/02-hieu-con.html",
+      file: "02-hieu-con",
       topics: ["Khái niệm", "Vì sao cần hiểu từ gốc rễ", "Những hiểu lầm thường gặp"]
     },
     {
       label: "3. Dấu hiệu và biểu hiện",
-      file: "pages/03-dau-hieu.html",
+      file: "03-dau-hieu",
       topics: ["Biểu hiện cảm xúc", "Biểu hiện hành vi", "Điểm mạnh của con"]
     },
     {
       label: "4. Hiểu hành vi của con",
-      file: "pages/04-phat-trien.html",
+      file: "04-phat-trien",
       topics: ["Các mốc phát triển", "Hành vi nói lên điều gì"]
     },
     {
       label: "5. Đồng hành cùng con",
-      file: "pages/05-dong-hanh.html",
+      file: "05-dong-hanh",
       topics: ["Phản ứng đầu tiên của ba mẹ", "Chăm sóc chính mình", "Anh chị em trong nhà", "15 lời khuyên cho gia đình"]
     },
     {
       label: "6. Phương pháp hỗ trợ",
-      file: "pages/06-ho-tro.html",
+      file: "06-ho-tro",
       topics: ["Các lựa chọn hiện có", "Chọn phương pháp phù hợp", "Theo dõi tiến bộ"]
     },
     {
       label: "7. Quyền lợi và nhà trường",
-      file: "pages/07-nha-truong.html",
+      file: "07-nha-truong",
       topics: ["Lợi ích của can thiệp sớm", "Chọn dịch vụ phù hợp", "Bắt đầu từ đâu"]
     },
     {
       label: "8. Cuộc sống hằng ngày",
-      file: "pages/08-cuoc-song.html",
+      file: "08-cuoc-song",
       topics: ["Xây dựng đội ngũ hỗ trợ", "Công nghệ hỗ trợ", "An toàn cho con"]
     },
     {
       label: "9. Kế hoạch 100 ngày",
-      file: "pages/09-ke-hoach.html",
+      file: "09-ke-hoach",
       topics: ["Lộ trình theo từng tuần"]
     },
     {
       label: "Thuật ngữ",
-      file: "pages/10-thuat-ngu.html",
+      file: "10-thuat-ngu",
       topics: []
     },
     {
       label: "Nguồn tài liệu & Lời cảm ơn",
-      file: "pages/acknowledgments.html",
+      file: "acknowledgments",
       topics: ["Các tổ chức & nguồn tham khảo", "Đội ngũ biên soạn", "Miễn trừ trách nhiệm"]
     }
   ]

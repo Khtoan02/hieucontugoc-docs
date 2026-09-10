@@ -6,6 +6,11 @@
       "source": "/docs/:path*",
       "destination": "/:path*",
       "permanent": true
+    },
+    {
+      "source": "/tai-lieu-mau/pages/:path*",
+      "destination": "/tai-lieu-mau/:path*",
+      "permanent": true
     }
   ]
 }
