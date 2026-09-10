@@ -139,6 +139,33 @@ img { max-width: 100%; height: auto; }
 
 .topbar .spacer { flex: 1; }
 
+.topbar .topbar-help {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 14px;
+  margin: 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-orange);
+  background: var(--color-orange-tint);
+  border: 1px solid rgba(249, 115, 22, .25);
+  border-radius: 20px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: all .2s ease;
+  flex-shrink: 0;
+}
+.topbar .topbar-help:hover {
+  background: var(--color-orange);
+  color: #fff;
+  border-color: var(--color-orange);
+  box-shadow: 0 2px 8px rgba(249, 115, 22, .3);
+}
+.topbar .topbar-help svg {
+  flex-shrink: 0;
+}
+
 /* =========================================================
    2. MENU ☰ — lưới toàn bộ trang (giống overlay "Pages")
    ========================================================= */
@@ -327,4 +354,9 @@ img { max-width: 100%; height: auto; }
   .topbar .doc-name { display: none; }
   .page-index { padding: 66px 18px 40px; }
   .page-index-close { top: 52px; right: 14px; }
+}
+
+@media (max-width: 520px) {
+  .topbar .topbar-help span { display: none; }
+  .topbar .topbar-help { padding: 6px 10px; margin: 0 6px; }
 }

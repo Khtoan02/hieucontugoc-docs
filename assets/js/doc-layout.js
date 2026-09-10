@@ -39,7 +39,8 @@
     menu: '<svg width="22" height="22" viewBox="0 0 40 40" fill="currentColor" aria-hidden="true"><path d="m5 10h30v3.4h-30v-3.4z m0 11.6v-3.2h30v3.2h-30z m0 8.4v-3.4h30v3.4h-30z"/></svg>',
     close: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>',
     prev: '<svg width="22" height="22" viewBox="0 0 40 40" fill="currentColor" aria-hidden="true"><path d="m33.4 18.4v3.2h-20.4l9.3 9.4-2.3 2.4-13.4-13.4 13.4-13.4 2.3 2.4-9.3 9.4h20.4z"/></svg>',
-    next: '<svg width="22" height="22" viewBox="0 0 40 40" fill="currentColor" aria-hidden="true"><path d="m20 6.6l13.4 13.4-13.4 13.4-2.3-2.4 9.3-9.4h-20.4v-3.2h20.4l-9.3-9.4z"/></svg>'
+    next: '<svg width="22" height="22" viewBox="0 0 40 40" fill="currentColor" aria-hidden="true"><path d="m20 6.6l13.4 13.4-13.4 13.4-2.3-2.4 9.3-9.4h-20.4v-3.2h20.4l-9.3-9.4z"/></svg>',
+    help: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>'
   };
 
   /* =======================================================
@@ -55,7 +56,10 @@
     '<div class="page-indicator">' + (index > -1 ? index + 1 : 1) + " / " + pages.length + "</div>" +
     '<span class="divider"></span>' +
     '<div class="doc-name">' + data.title + "</div>" +
-    '<div class="spacer"></div>';
+    '<div class="spacer"></div>' +
+    '<a class="topbar-help" href="https://hieucontugoc.online/zalo-group" target="_blank" rel="noopener noreferrer" title="Tham gia nhóm Zalo hỗ trợ">' +
+    ICON.help +
+    "<span>Chúng tôi ở đây để giúp bạn</span></a>";
   body.insertBefore(topbar, body.firstChild);
 
   /* =======================================================
