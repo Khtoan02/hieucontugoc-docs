@@ -90,10 +90,14 @@
     return pages.map(function (p, i) {
       var isCurr = i === index;
       var cls = "page-index-item" + (isCurr ? " is-current" : "");
+      var num = pad(i + 1);
       return (
         '<a class="' + cls + '" href="' + href(p.file) + '">' +
-        '<div class="thumb">' + pad(i + 1) + "</div>" +
-        '<span class="label"><b>' + pad(i + 1) + "</b>" + p.title + "</span></a>"
+        '<div class="thumb">' +
+        '<img src="/assets/img/thumbs/thumb-' + num + '.webp" alt="' + p.title + '" loading="lazy">' +
+        '<span class="thumb-num">' + num + '</span>' +
+        '</div>' +
+        '<span class="label"><b>' + num + "</b>" + p.title + "</span></a>"
       );
     }).join("");
   }
