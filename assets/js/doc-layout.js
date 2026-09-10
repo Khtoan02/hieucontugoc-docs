@@ -16,6 +16,9 @@
 
   /* Lấy đường dẫn thư mục gốc của tài liệu hiện tại (e.g. /tai-lieu-mau/) */
   function getDocFolder(path) {
+    if (!path && base && base.startsWith("/")) {
+      return base.endsWith("/") ? base : base + "/";
+    }
     var p = path || location.pathname;
     var parts = p.split("/").filter(Boolean);
     if (parts.length > 1) {
@@ -32,7 +35,7 @@
 
   function href(file) {
     var f = (file || "").replace(/\.html$/, "");
-    if (!f || f === "index") return docFolder;
+    if (!f || f === "index") return docFolder.replace(/\/$/, "");
     return docFolder + f;
   }
 
