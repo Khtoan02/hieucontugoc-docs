@@ -97,7 +97,7 @@
 
 .cover-toc-title {
   margin: 0 0 24px;
-  font-size: 21px;
+  font-size: 24px;
   font-weight: 700;
   color: #0a1931;
   padding-bottom: 14px;
@@ -105,8 +105,8 @@
 }
 
 .toc-entry {
-  margin-bottom: 20px;
-  padding-bottom: 16px;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
   border-bottom: 1px dashed #e2e8f0;
 }
 .toc-entry:last-child {
@@ -119,15 +119,15 @@
 .toc-chapter {
   display: inline-flex;
   align-items: center;
-  padding: 6px 14px;
-  margin-bottom: 8px;
+  padding: 7px 16px;
+  margin-bottom: 10px;
   font-family: var(--font-serif);
-  font-size: 15px;
+  font-size: 17.5px;
   font-weight: 700;
   color: #0a1931;
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-left: 3.5px solid var(--color-orange);
+  border-left: 4px solid var(--color-orange);
   border-radius: 6px;
   box-shadow: 0 2px 4px rgba(10, 25, 49, 0.03);
   transition: all .2s ease;
@@ -143,16 +143,17 @@
 .toc-topics {
   list-style: none;
   margin: 0;
-  padding: 0 0 0 8px;
+  padding: 0 0 0 10px;
 }
 .toc-topics li {
-  margin: 4px 0;
+  margin: 5px 0;
 }
 .toc-topics a {
   display: inline-block;
-  padding: 2px 0;
-  font-size: 14.5px;
-  color: #475569; /* Độ tương phản cao, dễ đọc */
+  padding: 3px 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #334155; /* Chữ to, đậm đà, độ tương phản cao, dễ đọc */
   transition: color .15s ease, transform .15s ease;
 }
 .toc-topics a:hover {
