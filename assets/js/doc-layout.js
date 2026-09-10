@@ -1,13 +1,6 @@
 /* =========================================================
-   doc-layout.js — dựng toàn bộ khung điều hướng của tài liệu:
-   thanh top bar, menu ☰ (lưới các trang), nút mũi tên
-   trước/sau, và mục lục ở trang bìa.
-
-   Mỗi file HTML chỉ cần khai báo trên thẻ <body>:
-     data-doc-base="..."   đường dẫn về thư mục gốc tài liệu
-                           ("" ở trang bìa, "../" ở trang con)
-     data-page="..."       file hiện tại, đúng như trong data.js
-   và nạp data.js TRƯỚC file này.
+   doc-layout.js — Dựng khung điều hướng của tài liệu &
+   Chuyển trang siêu mượt mà chuẩn 60/120 FPS (View Transitions)
    ========================================================= */
 
 (function () {
@@ -17,22 +10,43 @@
   if (!data) return;
 
   var body = document.body;
-  var base = body.getAttribute("data-doc-base") || "";
-  var current = body.getAttribute("data-page") || "index.html";
-  var siteRoot = base + "../";
   var pages = data.pages || [];
-  var index = pages.findIndex(function (p) {
-    var pf = (p.file || "").replace(/\.html$/, "");
-    var cf = current.replace(/\.html$/, "");
-    return pf === cf || (pf === "index" && (cf === "index" || cf === "index.html"));
-  });
+  var current = body.getAttribute("data-page") || "index.html";
+  var base = body.getAttribute("data-doc-base") || "";
+
+  /* Lấy đường dẫn thư mục gốc của tài liệu hiện tại (e.g. /tai-lieu-mau/) */
+  function getDocFolder(path) {
+    var p = path || location.pathname;
+    var parts = p.split("/").filter(Boolean);
+    if (parts.length > 1) {
+      return "/" + parts.slice(0, parts.length - 1).join("/") + "/";
+    }
+    if (parts.length === 1) {
+      return "/" + parts[0] + "/";
+    }
+    return "/";
+  }
+
+  var docFolder = getDocFolder();
+  var siteRoot = "/";
 
   function href(file) {
     var f = (file || "").replace(/\.html$/, "");
-    if (!f || f === "index") return base || "./";
-    return base + f;
+    if (!f || f === "index") return docFolder;
+    return docFolder + f;
   }
+
   function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+  function getPageIndex(pageFile) {
+    var cf = (pageFile || "").replace(/\.html$/, "");
+    return pages.findIndex(function (p) {
+      var pf = (p.file || "").replace(/\.html$/, "");
+      return pf === cf || (pf === "index" && (cf === "index" || cf === "index.html" || cf === ""));
+    });
+  }
+
+  var index = getPageIndex(current);
 
   /* --- Icon SVG --- */
   var ICON = {
@@ -69,19 +83,22 @@
   overlay.className = "page-index";
   overlay.hidden = true;
 
-  var cards = pages.map(function (p, i) {
-    var cls = "page-index-item" + (p.file === current ? " is-current" : "");
-    return (
-      '<a class="' + cls + '" href="' + href(p.file) + '">' +
-      '<div class="thumb">' + pad(i + 1) + "</div>" +
-      '<span class="label"><b>' + pad(i + 1) + "</b>" + p.title + "</span></a>"
-    );
-  }).join("");
+  function renderMenuCards() {
+    return pages.map(function (p, i) {
+      var isCurr = i === index;
+      var cls = "page-index-item" + (isCurr ? " is-current" : "");
+      return (
+        '<a class="' + cls + '" href="' + href(p.file) + '">' +
+        '<div class="thumb">' + pad(i + 1) + "</div>" +
+        '<span class="label"><b>' + pad(i + 1) + "</b>" + p.title + "</span></a>"
+      );
+    }).join("");
+  }
 
   overlay.innerHTML =
     '<button class="page-index-close" type="button" aria-label="Đóng">' + ICON.close + "</button>" +
     '<div class="page-index-head"><span>Mục lục</span><h2>' + data.title + "</h2></div>" +
-    '<div class="page-index-grid">' + cards + "</div>";
+    '<div class="page-index-grid">' + renderMenuCards() + "</div>";
   body.appendChild(overlay);
 
   function setMenu(open) {
@@ -123,67 +140,222 @@
   document.addEventListener("keydown", function (e) {
     if (e.target.matches("input, textarea")) return;
     if (e.key === "Escape" && !overlay.hidden) return setMenu(false);
-    if (e.key === "ArrowLeft" && prev) location.href = href(prev.file);
-    if (e.key === "ArrowRight" && next) location.href = href(next.file);
+    if (e.key === "ArrowLeft" && prev) navigateDoc(href(prev.file));
+    if (e.key === "ArrowRight" && next) navigateDoc(href(next.file));
   });
 
   /* =======================================================
-     4. Trang bìa: ảnh nền, tiêu đề, nút, mục lục
+     4. Khởi tạo nội dung trang (Trang bìa hoặc Trang con)
      ======================================================= */
-  var cover = document.querySelector(".doc-cover");
-  if (cover && data.cover) {
-    cover.style.setProperty("--cover-image", 'url("' + data.cover + '")');
-  }
+  function initPageElements() {
+    /* Trang bìa: ảnh nền, tiêu đề, nút, mục lục */
+    var cover = document.querySelector(".doc-cover");
+    if (cover && data.cover) {
+      cover.style.setProperty("--cover-image", 'url("' + data.cover + '")');
+    }
 
-  var titleEl = document.querySelector("[data-doc-title]");
-  if (titleEl) titleEl.textContent = data.title;
+    var titleEl = document.querySelector("[data-doc-title]");
+    if (titleEl) titleEl.textContent = data.title;
 
-  var subEl = document.querySelector("[data-doc-subtitle]");
-  if (subEl) {
-    if (data.subtitle) subEl.textContent = data.subtitle;
-    else subEl.remove();
-  }
+    var subEl = document.querySelector("[data-doc-subtitle]");
+    if (subEl) {
+      if (data.subtitle) subEl.textContent = data.subtitle;
+      else subEl.remove();
+    }
 
-  var pdfLink = document.querySelector("[data-pdf-link]");
-  if (pdfLink) {
-    if (data.pdf) pdfLink.href = data.pdf;
-    else pdfLink.remove();
-  }
+    var pdfLink = document.querySelector("[data-pdf-link]");
+    if (pdfLink) {
+      if (data.pdf) pdfLink.href = data.pdf;
+      else pdfLink.remove();
+    }
 
-  var tocEl = document.querySelector("[data-toc]");
-  if (tocEl) {
-    tocEl.innerHTML = (data.toc || []).map(function (entry) {
-      var topics = (entry.topics || []).map(function (t) {
-        return '<li><a href="' + href(entry.file) + '">' + t + "</a></li>";
+    var tocEl = document.querySelector("[data-toc]");
+    if (tocEl) {
+      tocEl.innerHTML = (data.toc || []).map(function (entry) {
+        var topics = (entry.topics || []).map(function (t) {
+          return '<li><a href="' + href(entry.file) + '">' + t + "</a></li>";
+        }).join("");
+        return (
+          '<div class="toc-entry">' +
+          '<a class="toc-chapter" href="' + href(entry.file) + '">' + entry.label + "</a>" +
+          '<ul class="toc-topics">' + topics + "</ul></div>"
+        );
       }).join("");
-      return (
-        '<div class="toc-entry">' +
-        '<a class="toc-chapter" href="' + href(entry.file) + '">' + entry.label + "</a>" +
-        '<ul class="toc-topics">' + topics + "</ul></div>"
-      );
-    }).join("");
-  }
+    }
 
-  /* Trang con: điền nhãn "chương x / y" và thẻ trang tiếp theo */
-  var eyebrow = document.querySelector("[data-eyebrow]");
-  if (eyebrow && index > -1) {
-    eyebrow.textContent = "Trang " + pad(index + 1) + " / " + pad(pages.length);
-  }
+    /* Trang con: điền nhãn "Trang x / y" và thẻ trang tiếp theo */
+    var eyebrow = document.querySelector("[data-eyebrow]");
+    if (eyebrow && index > -1) {
+      eyebrow.textContent = "Trang " + pad(index + 1) + " / " + pad(pages.length);
+    }
 
-  var nextCard = document.querySelector("[data-next-card]");
-  if (nextCard) {
-    if (next) {
-      nextCard.innerHTML =
-        '<a href="' + href(next.file) + '">' +
-        '<span class="label">Trang tiếp theo</span>' +
-        '<span class="title">' + next.title + "</span></a>";
-    } else {
-      nextCard.remove();
+    var nextCard = document.querySelector("[data-next-card]");
+    if (nextCard) {
+      if (next) {
+        nextCard.innerHTML =
+          '<a href="' + href(next.file) + '">' +
+          '<div class="doc-next-text">' +
+          '<span class="label">Trang tiếp theo</span>' +
+          '<span class="title">' + next.title + "</span>" +
+          "</div>" +
+          '<div class="arrow-icon" aria-hidden="true">' + ICON.next + "</div>" +
+          "</a>";
+      } else {
+        nextCard.remove();
+      }
     }
   }
 
+  /* Khởi tạo trang lần đầu */
+  initPageElements();
+
   /* =======================================================
-     5. Vercel Web Analytics
+     5. BỘ CHUYỂN TRANG SIÊU MƯỢT (Instant Preload & View Transitions)
+     ======================================================= */
+  var pageCache = {};
+
+  function preloadPage(url) {
+    if (!url || pageCache[url]) return;
+    fetch(url, { priority: "low" })
+      .then(function (res) { return res.ok ? res.text() : null; })
+      .then(function (html) { if (html) pageCache[url] = html; })
+      .catch(function () {});
+  }
+
+  // Tiền nạp trước trang sau và trang trước để chuyển tức thì 0ms
+  if (next) preloadPage(href(next.file));
+  if (prev) preloadPage(href(prev.file));
+
+  function navigateDoc(targetUrl, isPopState) {
+    if (!targetUrl) return;
+
+    var cachedHtml = pageCache[targetUrl];
+    var fetchPromise = cachedHtml
+      ? Promise.resolve(cachedHtml)
+      : fetch(targetUrl).then(function (res) {
+          if (!res.ok) throw new Error("HTTP error " + res.status);
+          return res.text();
+        });
+
+    fetchPromise
+      .then(function (html) {
+        pageCache[targetUrl] = html;
+        var parser = new DOMParser();
+        var newDoc = parser.parseFromString(html, "text/html");
+
+        function updateDOM() {
+          // Cập nhật tiêu đề trang
+          document.title = newDoc.title;
+
+          // Cập nhật thuộc tính body
+          var newPage = newDoc.body.getAttribute("data-page") || "";
+          var newBase = newDoc.body.getAttribute("data-doc-base") || "";
+          body.setAttribute("data-page", newPage);
+          body.setAttribute("data-doc-base", newBase);
+          body.className = newDoc.body.className;
+
+          // Thay thế phần nội dung chính (.doc-cover hoặc .doc-page)
+          var oldMain = document.querySelector(".doc-cover, .doc-page");
+          var newMain = newDoc.querySelector(".doc-cover, .doc-page");
+          if (oldMain && newMain) {
+            oldMain.replaceWith(newMain);
+          }
+
+          // Cập nhật trạng thái trang
+          current = newPage;
+          base = newBase;
+          index = getPageIndex(current);
+          prev = index > 0 ? pages[index - 1] : null;
+          next = index > -1 && index < pages.length - 1 ? pages[index + 1] : null;
+
+          // Cập nhật bộ đếm trang trên topbar
+          var indicator = topbar.querySelector(".page-indicator");
+          if (indicator) {
+            indicator.textContent = (index > -1 ? index + 1 : 1) + " / " + pages.length;
+          }
+
+          // Cập nhật thẻ mục lục ☰
+          var grid = overlay.querySelector(".page-index-grid");
+          if (grid) grid.innerHTML = renderMenuCards();
+
+          // Cập nhật nút mũi tên góc dưới
+          arrows.innerHTML = arrow(prev, "prev", "Trang trước") + arrow(next, "next", "Trang sau");
+
+          // Khởi tạo các thành phần giao diện của trang mới
+          initPageElements();
+
+          // Đóng menu nếu đang mở
+          setMenu(false);
+
+          // Cuộn lên đầu trang
+          window.scrollTo(0, 0);
+
+          // Đẩy vào lịch sử trình duyệt
+          if (!isPopState) {
+            history.pushState({ url: targetUrl }, "", targetUrl);
+          }
+
+          // Tiền nạp các trang lân cận cho lần bấm tiếp theo
+          if (next) preloadPage(href(next.file));
+          if (prev) preloadPage(href(prev.file));
+        }
+
+        if (document.startViewTransition) {
+          document.startViewTransition(updateDOM);
+        } else {
+          updateDOM();
+        }
+      })
+      .catch(function () {
+        // Dự phòng: chuyển trang chuẩn nếu fetch thất bại
+        window.location.href = targetUrl;
+      });
+  }
+
+  /* Bắt sự kiện click vào các liên kết trong cùng tài liệu */
+  document.addEventListener("click", function (e) {
+    var link = e.target.closest("a");
+    if (!link) return;
+
+    // Bỏ qua nếu là tab mới, tải về hoặc phím tắt đặc biệt
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (link.target === "_blank" || link.hasAttribute("download")) return;
+
+    var url = new URL(link.href, location.href);
+
+    // Bỏ qua nếu khác tên miền
+    if (url.origin !== location.origin) return;
+
+    // Nếu cùng trang và có hash (#), để trình duyệt tự cuộn
+    if (url.pathname === location.pathname && url.hash) return;
+
+    // Kiểm tra xem liên kết có thuộc về tài liệu hiện tại hay không
+    var targetFolder = getDocFolder(url.pathname);
+    if (targetFolder === docFolder) {
+      e.preventDefault();
+      navigateDoc(link.href, false);
+    }
+  });
+
+  /* Tiền nạp tức thì khi rê chuột qua liên kết (0ms latency khi bấm) */
+  document.addEventListener("mouseover", function (e) {
+    var link = e.target.closest("a");
+    if (!link || link.target === "_blank") return;
+    if (link.origin === location.origin) {
+      var targetFolder = getDocFolder(link.pathname);
+      if (targetFolder === docFolder) {
+        preloadPage(link.href);
+      }
+    }
+  }, { passive: true });
+
+  /* Hỗ trợ nút Back / Forward trên trình duyệt */
+  window.addEventListener("popstate", function () {
+    navigateDoc(location.href, true);
+  });
+
+  /* =======================================================
+     6. Vercel Web Analytics
      ======================================================= */
   if (!window.va) {
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
