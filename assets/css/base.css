@@ -30,6 +30,15 @@
   --radius: 8px;
   --topbar-h: 44px;
   --max-w: 1360px;
+
+  /* Editorial Handbook / Digital Handbook tokens */
+  --bg: #ffffff;
+  --surface-muted: #f8fafc;
+  --text-primary: #172033;
+  --text-secondary: #5f6b7a;
+  --border: #e6eaf0;
+  --accent: #2563eb;
+  --content-width: 760px;
 }
 
 *,

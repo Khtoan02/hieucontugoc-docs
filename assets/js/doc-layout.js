@@ -186,26 +186,71 @@
       }).join("");
     }
 
-    /* Trang con: điền nhãn "Trang x / y" và thẻ trang tiếp theo */
-    var eyebrow = document.querySelector("[data-eyebrow]");
-    if (eyebrow && index > -1) {
-      eyebrow.textContent = "Trang " + pad(index + 1) + " / " + pad(pages.length);
+    /* Trang con: điền thanh tiện ích trên đầu và điều hướng hai cột ở cuối */
+    var head = document.querySelector(".doc-page-head");
+    if (head && index > -1) {
+      var inner = head.querySelector(".inner");
+      if (inner) {
+        var metaEl = inner.querySelector(".doc-page-meta");
+        if (!metaEl) {
+          metaEl = document.createElement("div");
+          metaEl.className = "doc-page-meta";
+          var h1 = inner.querySelector("h1");
+          inner.insertBefore(metaEl, h1);
+        }
+
+        var label = index === 0
+          ? "Trang bìa"
+          : index === pages.length - 1
+            ? "Nguồn tài liệu & Lời cảm ơn"
+            : "Chương " + pad(index) + " / " + pad(pages.length - 2);
+
+        var topNavHtml = "";
+        if (prev) {
+          topNavHtml += '<a href="' + href(prev.file) + '">← Trước</a>';
+        }
+        if (prev && next) {
+          topNavHtml += '<span class="sep">·</span>';
+        }
+        if (next) {
+          topNavHtml += '<a href="' + href(next.file) + '">Sau →</a>';
+        }
+
+        metaEl.innerHTML =
+          '<span class="eyebrow">' + label + '</span>' +
+          '<div class="top-nav-links">' + topNavHtml + '</div>';
+
+        if (!inner.querySelector(".doc-page-divider")) {
+          var divider = document.createElement("hr");
+          divider.className = "doc-page-divider";
+          inner.appendChild(divider);
+        }
+      }
     }
 
     var nextCard = document.querySelector("[data-next-card]");
     if (nextCard) {
-      if (next) {
-        nextCard.innerHTML =
-          '<a href="' + href(next.file) + '">' +
-          '<div class="doc-next-text">' +
-          '<span class="label">Trang tiếp theo</span>' +
-          '<span class="title">' + next.title + "</span>" +
-          "</div>" +
-          '<div class="arrow-icon" aria-hidden="true">' + ICON.next + "</div>" +
-          "</a>";
+      var paginationHtml = '<nav class="doc-pagination" aria-label="Điều hướng chương">';
+      if (prev) {
+        var prevLabel = prev.file === "index" ? "Về trang bìa" : "Chương trước";
+        paginationHtml +=
+          '<a class="doc-page-link is-prev" href="' + href(prev.file) + '">' +
+          '<span class="nav-direction">← ' + prevLabel + '</span>' +
+          '<span class="nav-title">' + prev.title + '</span>' +
+          '</a>';
       } else {
-        nextCard.remove();
+        paginationHtml += '<div class="doc-page-link-spacer"></div>';
       }
+
+      if (next) {
+        paginationHtml +=
+          '<a class="doc-page-link is-next" href="' + href(next.file) + '">' +
+          '<span class="nav-direction">Chương tiếp theo →</span>' +
+          '<span class="nav-title">' + next.title + '</span>' +
+          '</a>';
+      }
+      paginationHtml += '</nav>';
+      nextCard.innerHTML = paginationHtml;
     }
   }
 
