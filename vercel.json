@@ -11,6 +11,16 @@
       "source": "/tai-lieu-mau/pages/:path*",
       "destination": "/tai-lieu-mau/:path*",
       "permanent": true
-    }
+    },
+    { "source": "/tai-lieu-mau/01-gioi-thieu", "destination": "/tai-lieu-mau/01-hieu-giac-quan", "permanent": true },
+    { "source": "/tai-lieu-mau/02-hieu-con", "destination": "/tai-lieu-mau/02-tu-dieu-hoa-den-qua-tai", "permanent": true },
+    { "source": "/tai-lieu-mau/03-dau-hieu", "destination": "/tai-lieu-mau/03-khi-qua-tai-thanh-hanh-vi", "permanent": true },
+    { "source": "/tai-lieu-mau/04-phat-trien", "destination": "/tai-lieu-mau/04-ban-do-cac-he-giac-quan", "permanent": true },
+    { "source": "/tai-lieu-mau/05-dong-hanh", "destination": "/tai-lieu-mau/05-phan-ung-voi-cam-giac", "permanent": true },
+    { "source": "/tai-lieu-mau/06-ho-tro", "destination": "/tai-lieu-mau/06-giac-quan-khong-tach-biet", "permanent": true },
+    { "source": "/tai-lieu-mau/07-nha-truong", "destination": "/tai-lieu-mau/07-ba-me-quan-sat-con", "permanent": true },
+    { "source": "/tai-lieu-mau/08-cuoc-song", "destination": "/tai-lieu-mau/08-ho-tro-tre-kho-dieu-hoa", "permanent": true },
+    { "source": "/tai-lieu-mau/09-ke-hoach", "destination": "/tai-lieu-mau/09-khi-nao-nhin-xa-hon", "permanent": true },
+    { "source": "/tai-lieu-mau/10-thuat-ngu", "destination": "/tai-lieu-mau/10-bo-cong-cu", "permanent": true }
   ]
 }

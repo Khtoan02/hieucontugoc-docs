@@ -1,12 +1,12 @@
 /* =========================================================
    data.js — KHAI BÁO TOÀN BỘ TÀI LIỆU
-   Sửa file này là trang bìa, menu ☰, số trang và nút
-   trước/sau của tất cả trang con đều tự cập nhật theo.
+   Hiểu Giác Quan & Cách Não Xử Lý Thông Tin
    ========================================================= */
 
 window.DOC_DATA = {
-  title: "Bộ tài liệu 100 ngày dành cho ba mẹ",
-  /* Ảnh nền trang bìa — thay bằng ảnh của bạn trong assets/img/ */
+  title: "Hiểu Giác Quan & Cách Não Xử Lý Thông Tin",
+  subtitle: "Cẩm nang toàn diện về giác quan, điều hòa và cách đồng hành cùng con từ gốc rễ.",
+  /* Ảnh nền trang bìa */
   cover: "/assets/img/2.jpg",
   /* Link tải PDF; để trống "" thì nút sẽ tự ẩn */
   pdf: "",
@@ -17,81 +17,162 @@ window.DOC_DATA = {
      trước/sau. Trang bìa luôn là mục đầu tiên.
      --------------------------------------------------------- */
   pages: [
-    { title: "Trang bìa",                  file: "index" },
-    { title: "Giới thiệu",                 file: "01-gioi-thieu" },
-    { title: "Hiểu con từ gốc",            file: "02-hieu-con" },
-    { title: "Dấu hiệu và biểu hiện",      file: "03-dau-hieu" },
-    { title: "Hiểu hành vi của con",       file: "04-phat-trien" },
-    { title: "Đồng hành cùng con",         file: "05-dong-hanh" },
-    { title: "Phương pháp hỗ trợ",         file: "06-ho-tro" },
-    { title: "Quyền lợi và nhà trường",    file: "07-nha-truong" },
-    { title: "Cuộc sống hằng ngày",        file: "08-cuoc-song" },
-    { title: "Kế hoạch 100 ngày",          file: "09-ke-hoach" },
-    { title: "Thuật ngữ",                  file: "10-thuat-ngu" },
-    { title: "Nguồn tài liệu & Lời cảm ơn", file: "acknowledgments" }
+    { title: "Trang bìa",                                      file: "index" },
+    { title: "1. Hiểu giác quan và cách não xử lý thông tin",  file: "01-hieu-giac-quan" },
+    { title: "2. Từ điều hòa đến quá tải giác quan",           file: "02-tu-dieu-hoa-den-qua-tai" },
+    { title: "3. Khi quá tải biểu hiện thành hành vi",         file: "03-khi-qua-tai-thanh-hanh-vi" },
+    { title: "4. Bản đồ các hệ giác quan của cơ thể",          file: "04-ban-do-cac-he-giac-quan" },
+    { title: "5. Trẻ phản ứng với cảm giác khác nhau như thế nào?", file: "05-phan-ung-voi-cam-giac" },
+    { title: "6. Giác quan không tồn tại tách biệt",           file: "06-giac-quan-khong-tach-biet" },
+    { title: "7. Ba mẹ nên quan sát con như thế nào?",         file: "07-ba-me-quan-sat-con" },
+    { title: "8. Hỗ trợ trẻ khi khó điều hòa",                 file: "08-ho-tro-tre-kho-dieu-hoa" },
+    { title: "9. Khi nào cần nhìn xa hơn giác quan?",          file: "09-khi-nao-nhin-xa-hon" },
+    { title: "10. Bộ công cụ hiểu giác quan của con",          file: "10-bo-cong-cu" },
+    { title: "11. Những câu hỏi ba mẹ thường gặp (FAQ)",       file: "11-cau-hoi-thuong-gap" },
+    { title: "12. Hiểu con trước khi cố thay đổi con",         file: "12-hieu-con-truoc-khi-thay-doi" },
+    { title: "Nguồn tài liệu & Lời cảm ơn",                    file: "acknowledgments" }
   ],
 
   /* ---------------------------------------------------------
      toc — MỤC LỤC HIỂN THỊ Ở TRANG BÌA.
      Mỗi mục gồm một nhãn chương (bấm được) và các dòng nội
-     dung nhỏ bên dưới. Không nhất thiết phải liệt kê hết
-     mọi trang trong `pages`.
+     dung nhỏ bên dưới.
      --------------------------------------------------------- */
   toc: [
     {
-      label: "1. Giới thiệu",
-      file: "01-gioi-thieu",
-      topics: ["Tài liệu này dành cho ai?", "Cách sử dụng tài liệu", "Ba mẹ không đơn độc"]
+      label: "1. Hiểu giác quan và cách não xử lý thông tin",
+      file: "01-hieu-giac-quan",
+      topics: [
+        "Giác quan là gì?",
+        "Xử lý thông tin cảm giác là gì?",
+        "Não không xử lý mọi kích thích như nhau",
+        "Vì sao trẻ tự kỷ có thể có khác biệt về cảm giác?"
+      ]
     },
     {
-      label: "2. Hiểu con từ gốc",
-      file: "02-hieu-con",
-      topics: ["Khái niệm", "Vì sao cần hiểu từ gốc rễ", "Những hiểu lầm thường gặp"]
+      label: "2. Từ điều hòa đến quá tải giác quan",
+      file: "02-tu-dieu-hoa-den-qua-tai",
+      topics: [
+        "Điều hòa giác quan là gì?",
+        "Mất điều hòa là gì?",
+        "Quá tải giác quan là gì?",
+        "Ngưỡng chịu đựng của hệ thần kinh",
+        "Vì sao hôm nay con chịu được nhưng hôm khác lại không?"
+      ]
     },
     {
-      label: "3. Dấu hiệu và biểu hiện",
-      file: "03-dau-hieu",
-      topics: ["Biểu hiện cảm xúc", "Biểu hiện hành vi", "Điểm mạnh của con"]
+      label: "3. Khi quá tải biểu hiện thành hành vi",
+      file: "03-khi-qua-tai-thanh-hanh-vi",
+      topics: [
+        "Quá tải có thể trông như thế nào?",
+        "Bùng nổ do quá tải (Meltdown)",
+        "Thu mình / đóng lại (Shutdown)",
+        "Meltdown có giống ăn vạ không?",
+        "Dấu hiệu báo trước một lần quá tải",
+        "Trẻ cần gì sau quá tải?"
+      ]
     },
     {
-      label: "4. Hiểu hành vi của con",
-      file: "04-phat-trien",
-      topics: ["Các mốc phát triển", "Hành vi nói lên điều gì"]
+      label: "4. Bản đồ các hệ giác quan của cơ thể",
+      file: "04-ban-do-cac-he-giac-quan",
+      topics: [
+        "Thính giác & Thị giác",
+        "Xúc giác, Mùi và vị",
+        "Hệ tiền đình (Vestibular)",
+        "Cảm nhận bản thể (Proprioception)",
+        "Cảm nhận bên trong cơ thể (Interoception)"
+      ]
     },
     {
-      label: "5. Đồng hành cùng con",
-      file: "05-dong-hanh",
-      topics: ["Phản ứng đầu tiên của ba mẹ", "Chăm sóc chính mình", "Anh chị em trong nhà", "15 lời khuyên cho gia đình"]
+      label: "5. Trẻ phản ứng với cảm giác khác nhau như thế nào?",
+      file: "05-phan-ung-voi-cam-giac",
+      topics: [
+        "Nhạy cảm hơn (Hyper-reactive)",
+        "Ít phản ứng hơn (Hypo-reactive)",
+        "Tìm kiếm cảm giác (Sensory seeking)",
+        "Tránh né cảm giác (Sensory avoiding)",
+        "Một trẻ có thể có nhiều kiểu phản ứng cùng lúc"
+      ]
     },
     {
-      label: "6. Phương pháp hỗ trợ",
-      file: "06-ho-tro",
-      topics: ["Các lựa chọn hiện có", "Chọn phương pháp phù hợp", "Theo dõi tiến bộ"]
+      label: "6. Giác quan không tồn tại tách biệt",
+      file: "06-giac-quan-khong-tach-biet",
+      topics: [
+        "Giác quan và giấc ngủ",
+        "Giác quan và đau",
+        "Giác quan và tiêu hóa",
+        "Giác quan và lo âu",
+        "Giác quan và giao tiếp, ăn uống, học tập"
+      ]
     },
     {
-      label: "7. Quyền lợi và nhà trường",
-      file: "07-nha-truong",
-      topics: ["Lợi ích của can thiệp sớm", "Chọn dịch vụ phù hợp", "Bắt đầu từ đâu"]
+      label: "7. Ba mẹ nên quan sát con như thế nào?",
+      file: "07-ba-me-quan-sat-con",
+      topics: [
+        "Đừng chỉ ghi lại hành vi",
+        "Quan sát Trước – Trong – Sau",
+        "Tìm mẫu hình lặp lại",
+        "Theo dõi trạng thái cơ thể",
+        "Ghi nhận điều gì giúp con phục hồi"
+      ]
     },
     {
-      label: "8. Cuộc sống hằng ngày",
-      file: "08-cuoc-song",
-      topics: ["Xây dựng đội ngũ hỗ trợ", "Công nghệ hỗ trợ", "An toàn cho con"]
+      label: "8. Hỗ trợ trẻ khi khó điều hòa",
+      file: "08-ho-tro-tre-kho-dieu-hoa",
+      topics: [
+        "Khi trẻ đang quá tải",
+        "Giảm kích thích không cần thiết & giảm lời nói",
+        "Chuẩn bị trước cho tình huống khó",
+        "Hỗ trợ trẻ nhận biết tín hiệu cơ thể",
+        "Công cụ hỗ trợ cảm giác",
+        "Điều gì không nên làm máy móc?"
+      ]
     },
     {
-      label: "9. Kế hoạch 100 ngày",
-      file: "09-ke-hoach",
-      topics: ["Lộ trình theo từng tuần"]
+      label: "9. Khi nào cần nhìn xa hơn giác quan?",
+      file: "09-khi-nao-nhin-xa-hon",
+      topics: [
+        "Hành vi thay đổi đột ngột",
+        "Những vấn đề sức khỏe dễ bị nhầm với giác quan",
+        "Khi nào nên gặp hoạt động trị liệu (OT)",
+        "Khi nào cần đánh giá y khoa",
+        "Vai trò của các chuyên gia khác"
+      ]
     },
     {
-      label: "Thuật ngữ",
-      file: "10-thuat-ngu",
-      topics: []
+      label: "10. Bộ công cụ hiểu giác quan của con",
+      file: "10-bo-cong-cu",
+      topics: [
+        "Checklist dấu hiệu quá tải",
+        "Nhật ký giác quan 7 ngày",
+        "Phiếu Trước – Trong – Sau",
+        "Bản đồ giác quan của con (Sensory Profile)",
+        "Phiếu chuẩn bị khi gặp chuyên gia"
+      ]
+    },
+    {
+      label: "11. Những câu hỏi ba mẹ thường gặp (FAQ)",
+      file: "11-cau-hoi-thuong-gap",
+      topics: [
+        "Giải đáp các thắc mắc phổ biến của phụ huynh"
+      ]
+    },
+    {
+      label: "12. Hiểu con trước khi cố thay đổi con",
+      file: "12-hieu-con-truoc-khi-thay-doi",
+      topics: [
+        "Chuyển từ can thiệp sang thấu hiểu",
+        "Thông điệp gửi gắm ba mẹ"
+      ]
     },
     {
       label: "Nguồn tài liệu & Lời cảm ơn",
       file: "acknowledgments",
-      topics: ["Các tổ chức & nguồn tham khảo", "Đội ngũ biên soạn", "Miễn trừ trách nhiệm"]
+      topics: [
+        "Các tổ chức & nghiên cứu uy tín",
+        "Đội ngũ biên soạn",
+        "Tuyên bố miễn trừ trách nhiệm y khoa"
+      ]
     }
   ]
 };
