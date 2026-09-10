@@ -7,7 +7,7 @@
 window.DOC_DATA = {
   title: "Bộ tài liệu 100 ngày dành cho ba mẹ",
   /* Ảnh nền trang bìa — thay bằng ảnh của bạn trong assets/img/ */
-  cover: "../../assets/img/cover.svg",
+  cover: "../../assets/img/2.jpg",
   /* Link tải PDF; để trống "" thì nút sẽ tự ẩn */
   pdf: "",
 
