@@ -9,19 +9,25 @@
   position: relative;
   min-height: 100vh;
   padding-top: var(--topbar-h);
-  background-color: #eef2f6;
+  background-color: #f1f5f9;
   background-image: var(--cover-image, none);
   background-size: cover;
-  background-position: center;
+  background-position: left center;
   background-attachment: fixed;
 }
 
-/* Lớp phủ trắng mờ để chữ nổi trên ảnh */
+/* Lớp phủ mềm nhẹ, giữ độ sống động cho tranh minh họa nhưng làm dịu nền */
 .doc-cover::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(105deg, rgba(255, 255, 255, .82) 0%, rgba(255, 255, 255, .66) 55%, rgba(255, 255, 255, .78) 100%);
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.55) 45%,
+    rgba(255, 255, 255, 0.75) 100%
+  );
+  pointer-events: none;
 }
 
 .cover-inner {
@@ -29,24 +35,41 @@
   z-index: 1;
   display: grid;
   grid-template-columns: 1.05fr 1fr;
-  gap: 64px;
+  gap: 48px;
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 64px 40px 96px;
+  padding: 56px 40px 96px;
+  align-items: start;
 }
 
-/* --- Cột trái: tiêu đề + nút --- */
+/* --- Cột trái: Hero Card kính mờ tách biệt hoàn toàn khỏi chi tiết rối rắm phía sau --- */
+.cover-hero {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 44px 40px;
+  box-shadow: 0 20px 45px -12px rgba(10, 25, 49, 0.08), 0 2px 8px rgba(10, 25, 49, 0.02);
+  position: sticky;
+  top: calc(var(--topbar-h) + 32px);
+}
+
 .cover-title {
-  margin: 0 0 26px;
-  font-size: clamp(28px, 3.4vw, 46px);
-  color: var(--color-navy);
+  margin: 0 0 20px;
+  font-size: clamp(28px, 3.2vw, 42px);
+  font-weight: 700;
+  color: #0a1931;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
 }
 
 .cover-subtitle {
-  margin: -12px 0 26px;
-  max-width: 440px;
-  color: var(--color-navy-soft);
-  font-size: 17px;
+  margin: 0 0 26px;
+  max-width: 460px;
+  color: #334155;
+  font-size: 16.5px;
+  line-height: 1.65;
 }
 
 .cover-actions {
@@ -56,46 +79,85 @@
   gap: 12px;
 }
 
-/* --- Cột phải: mục lục --- */
-.cover-toc-title {
-  margin: 0 0 22px;
-  font-size: 22px;
+.cover-actions .btn-primary {
+  box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
 }
 
-.toc-entry { margin-bottom: 22px; }
+/* --- Cột phải: Khung mục lục rõ nét, đọc êm mắt --- */
+.cover-toc {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 40px 40px;
+  box-shadow: 0 20px 45px -12px rgba(10, 25, 49, 0.08), 0 2px 8px rgba(10, 25, 49, 0.02);
+}
 
-/* Nhãn chương: hộp trắng, gạch chân cam (giống Autism Speaks) */
+.cover-toc-title {
+  margin: 0 0 24px;
+  font-size: 21px;
+  font-weight: 700;
+  color: #0a1931;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.toc-entry {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed #e2e8f0;
+}
+.toc-entry:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+/* Nhãn chương: dạng thẻ pill có đường viền cam nổi bật */
 .toc-chapter {
-  display: inline-block;
-  padding: 6px 15px;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
   margin-bottom: 8px;
   font-family: var(--font-serif);
-  font-size: 15.5px;
+  font-size: 15px;
   font-weight: 700;
-  color: var(--color-navy);
-  background: rgba(255, 255, 255, .92);
-  border-bottom: 2px solid var(--color-orange);
-  border-radius: 4px 4px 0 0;
-  transition: background .15s ease, color .15s ease;
+  color: #0a1931;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-left: 3.5px solid var(--color-orange);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(10, 25, 49, 0.03);
+  transition: all .2s ease;
 }
 .toc-chapter:hover {
-  background: #fff;
+  background: #ffffff;
   color: var(--color-orange-dark);
+  border-left-color: var(--color-orange-dark);
+  box-shadow: 0 4px 10px rgba(249, 115, 22, 0.15);
+  transform: translateX(3px);
 }
 
 .toc-topics {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 8px;
 }
-.toc-topics li { margin: 0; }
+.toc-topics li {
+  margin: 4px 0;
+}
 .toc-topics a {
-  display: block;
-  padding: 1px 0;
+  display: inline-block;
+  padding: 2px 0;
   font-size: 14.5px;
-  color: var(--color-navy-soft);
+  color: #475569; /* Độ tương phản cao, dễ đọc */
+  transition: color .15s ease, transform .15s ease;
 }
-.toc-topics a:hover { color: var(--color-orange); }
+.toc-topics a:hover {
+  color: var(--color-orange);
+  transform: translateX(2px);
+}
 
 /* =========================================================
    2. TRANG NỘI DUNG CON
@@ -221,7 +283,14 @@
   .doc-cover { background-attachment: scroll; }
   .cover-inner {
     grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 44px 22px 96px;
+    gap: 32px;
+    padding: 32px 16px 80px;
+  }
+  .cover-hero {
+    position: static;
+    padding: 32px 24px;
+  }
+  .cover-toc {
+    padding: 32px 24px;
   }
 }
