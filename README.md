@@ -21,13 +21,12 @@ assets/
     doc-layout.js              Tự chèn top bar, menu ☰, mũi tên; dựng mục lục
   img/
     cover.svg                  Ảnh nền trang bìa mặc định
-docs/
-  tai-lieu-mau/                Một thư mục = một bộ tài liệu
-    data.js                    Khai báo danh sách trang + mục lục
-    index.html                 Trang bìa
-    pages/                     Các trang nội dung con
-      01-gioi-thieu.html
-      ...
+tai-lieu-mau/                  Một thư mục = một bộ tài liệu (URL: /tai-lieu-mau)
+  data.js                      Khai báo danh sách trang + mục lục
+  index.html                   Trang bìa
+  pages/                       Các trang nội dung con
+    01-gioi-thieu.html
+    ...
 ```
 
 ## Chạy thử
@@ -36,11 +35,11 @@ docs/
 python3 -m http.server 8000
 ```
 
-Rồi vào http://localhost:8000
+Rồi vào http://localhost:8000 hoặc http://localhost:8000/tai-lieu-mau
 
 ## Sửa nội dung
 
-**Toàn bộ điều hướng nằm trong một file: `docs/tai-lieu-mau/data.js`.**
+**Toàn bộ điều hướng nằm trong một file: `tai-lieu-mau/data.js`.**
 
 - `pages` — thứ tự thật của tài liệu. Quyết định số trang (`06 / 11`),
   nội dung menu ☰ và nút trước/sau.
@@ -57,7 +56,7 @@ sờ vào từng file HTML.
 3. Thêm một dòng vào `pages` (và `toc` nếu muốn hiện ở trang bìa) trong `data.js`.
 4. Viết nội dung trong khối `<main class="doc-content">`.
 
-**Thêm một bộ tài liệu mới:** copy cả thư mục `docs/tai-lieu-mau/` sang tên mới,
+**Thêm một bộ tài liệu mới:** copy cả thư mục `tai-lieu-mau/` sang tên mới,
 sửa `data.js`, rồi thêm một thẻ `.home-doc-card` ở `index.html`.
 
 **Đổi màu:** sửa các biến ở đầu `assets/css/base.css`.

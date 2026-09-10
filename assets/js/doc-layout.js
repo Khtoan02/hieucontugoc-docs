@@ -19,11 +19,14 @@
   var body = document.body;
   var base = body.getAttribute("data-doc-base") || "";
   var current = body.getAttribute("data-page") || "index.html";
-  var siteRoot = base + "../../";
+  var siteRoot = base + "../";
   var pages = data.pages || [];
   var index = pages.findIndex(function (p) { return p.file === current; });
 
-  function href(file) { return base + file; }
+  function href(file) {
+    if (file === "index.html") return base || "./";
+    return base + file;
+  }
   function pad(n) { return (n < 10 ? "0" : "") + n; }
 
   /* --- Icon SVG --- */
@@ -40,7 +43,7 @@
   var topbar = document.createElement("header");
   topbar.className = "topbar";
   topbar.innerHTML =
-    '<a class="brand" href="' + siteRoot + 'index.html">hiểu con <em>từ gốc</em></a>' +
+    '<a class="brand" href="' + siteRoot + '">hiểu con <em>từ gốc</em></a>' +
     '<span class="divider"></span>' +
     '<button class="menu-btn" type="button" aria-label="Danh sách trang" aria-expanded="false">' + ICON.menu + "</button>" +
     '<span class="divider"></span>' +
