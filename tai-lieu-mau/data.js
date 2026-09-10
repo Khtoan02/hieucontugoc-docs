@@ -27,7 +27,8 @@ window.DOC_DATA = {
     { title: "Quyền lợi và nhà trường",    file: "pages/07-nha-truong.html" },
     { title: "Cuộc sống hằng ngày",        file: "pages/08-cuoc-song.html" },
     { title: "Kế hoạch 100 ngày",          file: "pages/09-ke-hoach.html" },
-    { title: "Thuật ngữ",                  file: "pages/10-thuat-ngu.html" }
+    { title: "Thuật ngữ",                  file: "pages/10-thuat-ngu.html" },
+    { title: "Nguồn tài liệu & Lời cảm ơn", file: "pages/acknowledgments.html" }
   ],
 
   /* ---------------------------------------------------------
@@ -86,6 +87,11 @@ window.DOC_DATA = {
       label: "Thuật ngữ",
       file: "pages/10-thuat-ngu.html",
       topics: []
+    },
+    {
+      label: "Nguồn tài liệu & Lời cảm ơn",
+      file: "pages/acknowledgments.html",
+      topics: ["Các tổ chức & nguồn tham khảo", "Đội ngũ biên soạn", "Miễn trừ trách nhiệm"]
     }
   ]
 };
