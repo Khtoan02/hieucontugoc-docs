@@ -516,26 +516,32 @@ img { max-width: 100%; height: auto; }
 }
 
 /* Khi lật trang kế tiếp (Next / Vuốt trái) */
-html[data-nav-dir="next"] ::view-transition-old(root) {
+html[data-nav-dir="next"]::view-transition-old(root),
+:root[data-nav-dir="next"]::view-transition-old(root) {
   animation: 0.28s cubic-bezier(0.2, 0.9, 0.3, 1) both slideOutLeft;
 }
-html[data-nav-dir="next"] ::view-transition-new(root) {
+html[data-nav-dir="next"]::view-transition-new(root),
+:root[data-nav-dir="next"]::view-transition-new(root) {
   animation: 0.28s cubic-bezier(0.2, 0.9, 0.3, 1) both slideInRight;
 }
 
 /* Khi quay lại trang trước (Prev / Vuốt phải) */
-html[data-nav-dir="prev"] ::view-transition-old(root) {
+html[data-nav-dir="prev"]::view-transition-old(root),
+:root[data-nav-dir="prev"]::view-transition-old(root) {
   animation: 0.28s cubic-bezier(0.2, 0.9, 0.3, 1) both slideOutRight;
 }
-html[data-nav-dir="prev"] ::view-transition-new(root) {
+html[data-nav-dir="prev"]::view-transition-new(root),
+:root[data-nav-dir="prev"]::view-transition-new(root) {
   animation: 0.28s cubic-bezier(0.2, 0.9, 0.3, 1) both slideInLeft;
 }
 
 /* Chuyển trang qua Menu hoặc không xác định hướng: fade mượt */
-html[data-nav-dir="fade"] ::view-transition-old(root) {
+html[data-nav-dir="fade"]::view-transition-old(root),
+:root[data-nav-dir="fade"]::view-transition-old(root) {
   animation: 0.2s ease both pageFadeOut;
 }
-html[data-nav-dir="fade"] ::view-transition-new(root) {
+html[data-nav-dir="fade"]::view-transition-new(root),
+:root[data-nav-dir="fade"]::view-transition-new(root) {
   animation: 0.25s ease both pageFadeIn;
 }
 

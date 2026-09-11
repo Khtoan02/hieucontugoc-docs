@@ -319,7 +319,9 @@
 
     // Xác định chiều chuyển trang (next / prev / fade)
     var urlObj = new URL(targetUrl, location.href);
-    var targetFile = urlObj.pathname.replace(docFolder, "").replace(/^\/+/, "").replace(/\.html$/, "");
+    var cleanPath = urlObj.pathname.replace(/\/$/, "");
+    var cleanFolder = docFolder.replace(/\/$/, "");
+    var targetFile = cleanPath.replace(cleanFolder, "").replace(/^\/+/, "").replace(/\.html$/, "");
     if (!targetFile) targetFile = "index";
     var targetIdx = getPageIndex(targetFile);
 
