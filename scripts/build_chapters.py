@@ -361,7 +361,7 @@ def render_chapter_html(ch_num, cfg, raw_items):
             if img_key in IMG_MAPPING:
                 info = IMG_MAPPING[img_key]
                 return f"""      <figure class="doc-figure">
-        <img src="{info["src"]}" alt="{info["alt"]}" loading="lazy">
+        <img src="{info["src"]}" alt="" loading="lazy">
         <figcaption>{info["caption"]}</figcaption>
       </figure>"""
               
@@ -517,7 +517,7 @@ def render_chapter_html(ch_num, cfg, raw_items):
                     items_after = items[img_idx + 1:]
 
                 side_fig_html = f"""        <figure class="doc-figure doc-figure-side">
-          <img src="{side_img_info["src"]}" alt="{side_img_info["alt"]}" loading="lazy">
+          <img src="{side_img_info["src"]}" alt="" loading="lazy">
           <figcaption>{side_img_info["caption"]}</figcaption>
         </figure>"""
                 text_inner = []

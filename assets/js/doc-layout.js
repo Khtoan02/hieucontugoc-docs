@@ -94,7 +94,7 @@
       return (
         '<a class="' + cls + '" href="' + href(p.file) + '">' +
         '<div class="thumb">' +
-        '<img src="/assets/img/thumbs/thumb-' + num + '.webp" alt="' + p.title + '" loading="lazy">' +
+        '<img src="/assets/img/thumbs/thumb-' + num + '.webp" alt="" loading="lazy">' +
         '</div>' +
         '<span class="label">' + p.title + "</span></a>"
       );
