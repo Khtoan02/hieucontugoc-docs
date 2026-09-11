@@ -18,8 +18,7 @@ PAGES = [
     ("thumb-10.webp", "http://localhost:8000/giac-quan/khi-nao-nhin-xa-hon.html"),
     ("thumb-11.webp", "http://localhost:8000/giac-quan/bo-cong-cu.html"),
     ("thumb-12.webp", "http://localhost:8000/giac-quan/cau-hoi-thuong-gap.html"),
-    ("thumb-13.webp", "http://localhost:8000/giac-quan/hieu-con-truoc-khi-thay-doi.html"),
-    ("thumb-14.webp", "http://localhost:8000/giac-quan/acknowledgments.html")
+    ("thumb-13.webp", "http://localhost:8000/giac-quan/hieu-con-truoc-khi-thay-doi.html")
 ]
 
 OUT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "img", "thumbs")

@@ -29,8 +29,7 @@ window.DOC_DATA = {
     { title: "9. Khi nào cần nhìn xa hơn giác quan?",          file: "khi-nao-nhin-xa-hon" },
     { title: "10. Bộ công cụ hiểu giác quan của con",          file: "bo-cong-cu" },
     { title: "11. Những câu hỏi ba mẹ thường gặp (FAQ)",       file: "cau-hoi-thuong-gap" },
-    { title: "12. Hiểu con trước khi cố thay đổi con",         file: "hieu-con-truoc-khi-thay-doi" },
-    { title: "Nguồn tài liệu & Lời cảm ơn",                    file: "acknowledgments" }
+    { title: "12. Hiểu con trước khi cố thay đổi con",         file: "hieu-con-truoc-khi-thay-doi" }
   ],
 
   /* ---------------------------------------------------------
@@ -163,15 +162,6 @@ window.DOC_DATA = {
       topics: [
         "Chuyển từ can thiệp sang thấu hiểu",
         "Thông điệp gửi gắm ba mẹ"
-      ]
-    },
-    {
-      label: "Nguồn tài liệu & Lời cảm ơn",
-      file: "acknowledgments",
-      topics: [
-        "Các tổ chức & nghiên cứu uy tín",
-        "Đội ngũ biên soạn",
-        "Tuyên bố miễn trừ trách nhiệm y khoa"
       ]
     }
   ]

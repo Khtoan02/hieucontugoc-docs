@@ -209,9 +209,7 @@
 
         var label = index === 0
           ? "Trang bìa"
-          : index === pages.length - 1
-            ? "Nguồn tài liệu & Lời cảm ơn"
-            : "Chương " + pad(index) + " / " + pad(pages.length - 2);
+          : "Chương " + pad(index) + " / " + pad(pages.length - 1);
 
         var topNavHtml = "";
         if (prev) {
@@ -240,15 +238,25 @@
     if (nextCard) {
       var fullNavHtml = "";
       if (next) {
-        var nextLabel = next.file === "acknowledgments" ? "Phần tiếp theo" : "Đọc tiếp chương sau";
         fullNavHtml +=
           '<div class="doc-next-banner-wrap">' +
           '<a class="doc-next-banner" href="' + href(next.file) + '">' +
           '<div class="next-banner-meta">' +
-          '<span class="next-banner-label">' + nextLabel + '</span>' +
+          '<span class="next-banner-label">Đọc tiếp chương sau</span>' +
           '<span class="next-banner-title">' + next.title + '</span>' +
           '</div>' +
           '<span class="next-banner-arrow" aria-hidden="true">→</span>' +
+          '</a>' +
+          '</div>';
+      } else {
+        fullNavHtml +=
+          '<div class="doc-next-banner-wrap">' +
+          '<a class="doc-next-banner" href="' + href("index") + '">' +
+          '<div class="next-banner-meta">' +
+          '<span class="next-banner-label">Hoàn thành ' + (pages.length - 1) + ' chương</span>' +
+          '<span class="next-banner-title">Quay về trang bìa tài liệu</span>' +
+          '</div>' +
+          '<span class="next-banner-arrow" aria-hidden="true">↺</span>' +
           '</a>' +
           '</div>';
       }
@@ -270,6 +278,12 @@
           '<a class="doc-page-link is-next" href="' + href(next.file) + '">' +
           '<span class="nav-direction">Chương tiếp theo →</span>' +
           '<span class="nav-title">' + next.title + '</span>' +
+          '</a>';
+      } else {
+        paginationHtml +=
+          '<a class="doc-page-link is-next" href="' + href("index") + '">' +
+          '<span class="nav-direction">Hoàn thành tài liệu →</span>' +
+          '<span class="nav-title">Về trang bìa</span>' +
           '</a>';
       }
       paginationHtml += '</nav>';
