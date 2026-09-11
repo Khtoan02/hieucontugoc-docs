@@ -95,9 +95,8 @@
         '<a class="' + cls + '" href="' + href(p.file) + '">' +
         '<div class="thumb">' +
         '<img src="/assets/img/thumbs/thumb-' + num + '.webp" alt="' + p.title + '" loading="lazy">' +
-        '<span class="thumb-num">' + num + '</span>' +
         '</div>' +
-        '<span class="label"><b>' + num + "</b>" + p.title + "</span></a>"
+        '<span class="label">' + p.title + "</span></a>"
       );
     }).join("");
   }
@@ -120,6 +119,10 @@
   overlay.querySelector(".page-index-close").addEventListener("click", function () {
     setMenu(false);
   });
+
+  if (location.hash === "#menu" || location.search.indexOf("menu=1") > -1) {
+    setMenu(true);
+  }
 
   /* =======================================================
      3. Mũi tên trước / sau
