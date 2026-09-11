@@ -38,7 +38,8 @@
   --text-secondary: #5f6b7a;
   --border: #e6eaf0;
   --accent: #2563eb;
-  --content-width: 800px;
+  --content-width: 1080px;
+  --container-width: 1080px;
 }
 
 *,
