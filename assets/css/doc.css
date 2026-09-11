@@ -86,6 +86,26 @@
   box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
 }
 
+.cover-actions .btn-fb {
+  display: inline-flex;
+  align-items: center;
+}
+
+.cover-actions .btn-fb svg {
+  color: #1877f2;
+  transition: transform .22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cover-actions .btn-fb:hover {
+  border-color: #1877f2;
+  color: #1877f2;
+  box-shadow: 0 6px 18px rgba(24, 119, 242, 0.15);
+}
+
+.cover-actions .btn-fb:hover svg {
+  transform: scale(1.15);
+}
+
 /* --- Cột phải: Khung mục lục rõ nét, đọc êm mắt --- */
 .cover-toc {
   background: rgba(255, 255, 255, 0.88);
