@@ -371,9 +371,11 @@ def render_chapter_html(ch_num, cfg, raw_items):
         download_match = re.match(r'^\[Tải\s+(.*?)\s*–\s*PDF\]$', plain)
         if download_match:
             doc_name = download_match.group(1)
+            import urllib.parse
+            doc_param = urllib.parse.quote(doc_name)
             return f"""      <div class="tool-action">
-        <a class="btn btn-download" href="https://hieucontugoc.online/zalo-group" target="_blank" rel="noopener noreferrer">
-          <span>📥 Tải {doc_name} (PDF)</span>
+        <a class="btn btn-download" href="/giac-quan/nhan-tai-lieu.html?doc={doc_param}">
+          <span>📄 {doc_name}</span>
         </a>
       </div>"""
 

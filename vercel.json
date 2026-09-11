@@ -118,6 +118,11 @@
       "permanent": true
     },
     {
+      "source": "/nhan-tai-lieu",
+      "destination": "/giac-quan/nhan-tai-lieu",
+      "permanent": true
+    },
+    {
       "source": "/giac-quan/12-hieu-con-truoc-khi-thay-doi",
       "destination": "/giac-quan/hieu-con-truoc-khi-thay-doi",
       "permanent": true
