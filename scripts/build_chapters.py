@@ -625,7 +625,17 @@ def render_chapter_html(ch_num, cfg, raw_items):
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{page_title} — Hiểu Con Từ Gốc</title>
+  <title>{page_title} — Hiểu con từ Gốc - Giác quan</title>
+  <meta name="description" content="{page_title} — Tài liệu Hiểu con từ Gốc - Giác quan">
+  <meta property="og:title" content="{page_title} — Hiểu con từ Gốc - Giác quan">
+  <meta property="og:description" content="Cẩm nang toàn diện về 8 hệ giác quan, điều hòa và cách đồng hành cùng con từ gốc rễ.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="/assets/img/2.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{page_title} — Hiểu con từ Gốc - Giác quan">
+  <meta name="twitter:description" content="Cẩm nang toàn diện về 8 hệ giác quan, điều hòa và cách đồng hành cùng con từ gốc rễ.">
+  <meta name="twitter:image" content="/assets/img/2.jpg">
+  <link rel="icon" type="image/png" href="/assets/img/icon.png">
   <link rel="stylesheet" href="/assets/css/base.css">
   <link rel="stylesheet" href="/assets/css/doc.css">
 </head>
