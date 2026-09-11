@@ -20,8 +20,8 @@ class CleanHandler(http.server.SimpleHTTPRequestHandler):
 
 if __name__ == '__main__':
     port = int(sys.argv[1]) if len(sys.argv) > 1 else PORT
-    socketserver.TCPServer.allow_reuse_address = True
-    with socketserver.TCPServer(("", port), CleanHandler) as httpd:
+    socketserver.ThreadingTCPServer.allow_reuse_address = True
+    with socketserver.ThreadingTCPServer(("", port), CleanHandler) as httpd:
         print(f"Local server đang chạy tại: http://localhost:{port}")
         try:
             httpd.serve_forever()

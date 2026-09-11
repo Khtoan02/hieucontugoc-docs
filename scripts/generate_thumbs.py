@@ -6,20 +6,20 @@ import time
 from PIL import Image
 
 PAGES = [
-    ("thumb-01.webp", "http://localhost:8000/tai-lieu-mau/"),
-    ("thumb-02.webp", "http://localhost:8000/tai-lieu-mau/01-hieu-giac-quan.html"),
-    ("thumb-03.webp", "http://localhost:8000/tai-lieu-mau/02-tu-dieu-hoa-den-qua-tai.html"),
-    ("thumb-04.webp", "http://localhost:8000/tai-lieu-mau/03-khi-qua-tai-thanh-hanh-vi.html"),
-    ("thumb-05.webp", "http://localhost:8000/tai-lieu-mau/04-ban-do-cac-he-giac-quan.html"),
-    ("thumb-06.webp", "http://localhost:8000/tai-lieu-mau/05-phan-ung-voi-cam-giac.html"),
-    ("thumb-07.webp", "http://localhost:8000/tai-lieu-mau/06-giac-quan-khong-tach-biet.html"),
-    ("thumb-08.webp", "http://localhost:8000/tai-lieu-mau/07-ba-me-quan-sat-con.html"),
-    ("thumb-09.webp", "http://localhost:8000/tai-lieu-mau/08-ho-tro-tre-kho-dieu-hoa.html"),
-    ("thumb-10.webp", "http://localhost:8000/tai-lieu-mau/09-khi-nao-nhin-xa-hon.html"),
-    ("thumb-11.webp", "http://localhost:8000/tai-lieu-mau/10-bo-cong-cu.html"),
-    ("thumb-12.webp", "http://localhost:8000/tai-lieu-mau/11-cau-hoi-thuong-gap.html"),
-    ("thumb-13.webp", "http://localhost:8000/tai-lieu-mau/12-hieu-con-truoc-khi-thay-doi.html"),
-    ("thumb-14.webp", "http://localhost:8000/tai-lieu-mau/acknowledgments.html")
+    ("thumb-01.webp", "http://localhost:8000/giac-quan/"),
+    ("thumb-02.webp", "http://localhost:8000/giac-quan/hieu-giac-quan.html"),
+    ("thumb-03.webp", "http://localhost:8000/giac-quan/tu-dieu-hoa-den-qua-tai.html"),
+    ("thumb-04.webp", "http://localhost:8000/giac-quan/khi-qua-tai-thanh-hanh-vi.html"),
+    ("thumb-05.webp", "http://localhost:8000/giac-quan/ban-do-cac-he-giac-quan.html"),
+    ("thumb-06.webp", "http://localhost:8000/giac-quan/phan-ung-voi-cam-giac.html"),
+    ("thumb-07.webp", "http://localhost:8000/giac-quan/giac-quan-khong-tach-biet.html"),
+    ("thumb-08.webp", "http://localhost:8000/giac-quan/ba-me-quan-sat-con.html"),
+    ("thumb-09.webp", "http://localhost:8000/giac-quan/ho-tro-tre-kho-dieu-hoa.html"),
+    ("thumb-10.webp", "http://localhost:8000/giac-quan/khi-nao-nhin-xa-hon.html"),
+    ("thumb-11.webp", "http://localhost:8000/giac-quan/bo-cong-cu.html"),
+    ("thumb-12.webp", "http://localhost:8000/giac-quan/cau-hoi-thuong-gap.html"),
+    ("thumb-13.webp", "http://localhost:8000/giac-quan/hieu-con-truoc-khi-thay-doi.html"),
+    ("thumb-14.webp", "http://localhost:8000/giac-quan/acknowledgments.html")
 ]
 
 OUT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "img", "thumbs")

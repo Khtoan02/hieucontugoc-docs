@@ -14,7 +14,7 @@
   var current = body.getAttribute("data-page") || "index.html";
   var base = body.getAttribute("data-doc-base") || "";
 
-  /* Lấy đường dẫn thư mục gốc của tài liệu hiện tại (e.g. /tai-lieu-mau/) */
+  /* Lấy đường dẫn thư mục gốc của tài liệu hiện tại (e.g. /giac-quan/) */
   function getDocFolder(path) {
     if (!path && base && base.startsWith("/")) {
       return base.endsWith("/") ? base : base + "/";
@@ -238,6 +238,21 @@
 
     var nextCard = document.querySelector("[data-next-card]");
     if (nextCard) {
+      var fullNavHtml = "";
+      if (next) {
+        var nextLabel = next.file === "acknowledgments" ? "Phần tiếp theo" : "Đọc tiếp chương sau";
+        fullNavHtml +=
+          '<div class="doc-next-banner-wrap">' +
+          '<a class="doc-next-banner" href="' + href(next.file) + '">' +
+          '<div class="next-banner-meta">' +
+          '<span class="next-banner-label">' + nextLabel + '</span>' +
+          '<span class="next-banner-title">' + next.title + '</span>' +
+          '</div>' +
+          '<span class="next-banner-arrow" aria-hidden="true">→</span>' +
+          '</a>' +
+          '</div>';
+      }
+
       var paginationHtml = '<nav class="doc-pagination" aria-label="Điều hướng chương">';
       if (prev) {
         var prevLabel = prev.file === "index" ? "Về trang bìa" : "Chương trước";
@@ -258,7 +273,7 @@
           '</a>';
       }
       paginationHtml += '</nav>';
-      nextCard.innerHTML = paginationHtml;
+      nextCard.innerHTML = fullNavHtml + paginationHtml;
     }
   }
 
@@ -275,7 +290,7 @@
     fetch(url, { priority: "low" })
       .then(function (res) { return res.ok ? res.text() : null; })
       .then(function (html) { if (html) pageCache[url] = html; })
-      .catch(function () {});
+      .catch(function () { });
   }
 
   // Tiền nạp trước trang sau và trang trước để chuyển tức thì 0ms
@@ -289,9 +304,9 @@
     var fetchPromise = cachedHtml
       ? Promise.resolve(cachedHtml)
       : fetch(targetUrl).then(function (res) {
-          if (!res.ok) throw new Error("HTTP error " + res.status);
-          return res.text();
-        });
+        if (!res.ok) throw new Error("HTTP error " + res.status);
+        return res.text();
+      });
 
     fetchPromise
       .then(function (html) {

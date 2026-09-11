@@ -302,54 +302,299 @@
   display: none;
 }
 
-/* --- Nội dung đọc một cột trải dài theo chiều dọc --- */
-.doc-content {
-  max-width: var(--content-width);
-  margin: 0 auto;
-  padding: 40px 24px 64px;
-  font-family: var(--font-sans);
+/* =========================================================
+   2. TRANG NỘI DUNG CON (CHAPTER PAGES)
+   Nền nhẹ nhàng bao quanh (#f1f5f9), nội dung đóng khung gọn gàng, trang nhã
+   ========================================================= */
+.doc-page {
+  background-color: #f1f5f9;
+  min-height: 100vh;
+  padding-bottom: 64px;
 }
 
-.doc-content h2 {
-  margin-top: 56px;
-  margin-bottom: 20px;
-  padding-bottom: 0;
-  border-bottom: none;
+/* Khung nội dung tài liệu dạng thẻ trang sách (Document Card Sheet) */
+.doc-content {
+  max-width: 860px;
+  margin: 36px auto 44px;
+  padding: 48px 52px 52px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 10px 35px -6px rgba(10, 25, 49, 0.07), 0 2px 8px -1px rgba(10, 25, 49, 0.03);
   font-family: var(--font-sans);
-  font-size: 24px;
+  animation: pageContentFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (max-width: 900px) {
+  .doc-content {
+    margin: 20px 16px 36px;
+    padding: 32px 24px 38px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .doc-content {
+    margin: 14px 10px 28px;
+    padding: 24px 16px 28px;
+    border-radius: 8px;
+  }
+}
+
+/* =========================================================
+   HEADING BANNERS — DẢI MÀU PHÂN ĐOẠN THEO PHONG CÁCH AUTISM SPEAKS
+   Tạo nhận diện thị giác trực quan, phân tách chủ đề dứt khoát
+   ========================================================= */
+.doc-content h2 {
+  margin-top: 48px;
+  margin-bottom: 20px;
+  padding: 12px 20px;
+  font-family: var(--font-sans);
+  font-size: clamp(18.5px, 2.2vw, 22px);
   font-weight: 700;
   line-height: 1.35;
-  letter-spacing: -0.015em;
-  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  color: #ffffff !important;
+  background: var(--color-navy);
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(10, 25, 49, 0.08);
+  display: block;
 }
-.doc-content h2:first-child { margin-top: 0; }
+
+.doc-content h2::before {
+  display: none !important;
+}
+
+.doc-content h2:first-child,
+.doc-content .lead-p + h2 { 
+  margin-top: 28px; 
+}
+
+/* Các biến thể màu sắc banner phân biệt đề mục */
+.doc-content h2.banner-blue {
+  background: #2563eb;
+  box-shadow: 0 3px 12px rgba(37, 99, 235, 0.22);
+}
+.doc-content h2.banner-teal {
+  background: #0d9488;
+  box-shadow: 0 3px 12px rgba(13, 148, 136, 0.2);
+}
+.doc-content h2.banner-amber {
+  background: #d97706;
+  box-shadow: 0 3px 12px rgba(217, 119, 6, 0.2);
+}
+.doc-content h2.banner-rose {
+  background: #e11d48;
+  box-shadow: 0 3px 12px rgba(225, 29, 72, 0.22);
+}
+.doc-content h2.banner-orange {
+  background: #ea580c;
+  box-shadow: 0 3px 12px rgba(234, 88, 12, 0.22);
+}
+.doc-content h2.banner-navy {
+  background: #0a1931;
+  box-shadow: 0 3px 12px rgba(10, 25, 49, 0.2);
+}
+.doc-content h2.banner-indigo {
+  background: #4f46e5;
+  box-shadow: 0 3px 12px rgba(79, 70, 229, 0.2);
+}
 
 .doc-content h3 {
-  margin-top: 36px;
-  margin-bottom: 14px;
+  margin-top: 28px;
+  margin-bottom: 12px;
   font-family: var(--font-sans);
-  font-size: 19px;
-  font-weight: 600;
+  font-size: 18.5px;
+  font-weight: 700;
   line-height: 1.4;
-  color: var(--text-primary);
+  color: #0a1931;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
+.doc-content h3::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 18px;
+  background: var(--color-orange);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Đoạn văn: nhịp đọc gọn gàng, line-height 1.62 vừa vặn, không bị dàn trải */
 .doc-content p {
-  margin: 0 0 22px;
-  font-size: 17.5px;
-  line-height: 1.75;
+  margin: 0 0 14px;
+  font-size: 16.5px;
+  line-height: 1.62;
   color: #334155;
 }
 
-.doc-content ul, .doc-content ol {
-  margin: 0 0 28px;
-  padding-left: 26px;
+.doc-content .lead-p {
   font-size: 17.5px;
-  line-height: 1.75;
+  line-height: 1.65;
+  color: #1e293b;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.doc-content ul {
+  margin: 0 0 18px;
+  padding-left: 20px;
+  font-size: 16px;
+  line-height: 1.62;
   color: #334155;
+}
+.doc-content ul li {
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 4px;
+}
+.doc-content ul li::marker {
+  color: #2563eb;
+  font-size: 1.05em;
+}
+
+.doc-content ol {
+  margin: 0 0 18px;
+  padding-left: 22px;
+  font-size: 16px;
+  line-height: 1.62;
+  color: #334155;
+}
+.doc-content ol li {
+  margin-bottom: 8px;
+}
+.doc-content ol li::marker {
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+/* =========================================================
+   LƯỚI ĐA CỘT & THẺ SO SÁNH SONG SONG (AUTISM SPEAKS STYLE)
+   ========================================================= */
+.doc-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+  margin: 26px 0 32px;
+}
+
+.doc-grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 22px 0 28px;
+}
+
+.doc-col-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-top: 4px solid #2563eb;
+  border-radius: 12px;
+  padding: 24px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 14px -3px rgba(10, 25, 49, 0.04), 0 1px 3px rgba(10, 25, 49, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.doc-col-card:hover {
+  box-shadow: 0 8px 22px -4px rgba(10, 25, 49, 0.08);
+}
+
+/* Card color variants */
+.doc-col-card.card-rose,
+.doc-col-card:nth-child(3) {
+  border-top-color: #e11d48;
+  background: linear-gradient(180deg, #fff5f6 0%, #fafbfc 65px, #f8fafc 100%);
+}
+.doc-col-card.card-rose .col-card-title {
+  color: #be123c;
+}
+
+.doc-col-card.card-teal,
+.doc-col-card:nth-child(2) {
+  border-top-color: #0d9488;
+  background: linear-gradient(180deg, #f0fdfa 0%, #fafbfc 65px, #f8fafc 100%);
+}
+.doc-col-card.card-teal .col-card-title {
+  color: #0f766e;
+}
+
+.doc-col-card.card-amber {
+  border-top-color: #d97706;
+  background: linear-gradient(180deg, #fffbeb 0%, #fafbfc 65px, #f8fafc 100%);
+}
+.doc-col-card.card-amber .col-card-title {
+  color: #b45309;
+}
+
+.doc-col-card.card-blue {
+  border-top-color: #2563eb;
+  background: linear-gradient(180deg, #eff6ff 0%, #fafbfc 65px, #f8fafc 100%);
+}
+.doc-col-card.card-blue .col-card-title {
+  color: #1d4ed8;
+}
+
+.doc-col-card .col-card-title {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin: 0 0 14px;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.doc-col-card p {
+  font-size: 15.5px;
+  line-height: 1.62;
+  color: #334155;
+  margin: 0 0 12px;
+}
+
+.doc-col-card p:last-child {
+  margin-bottom: 0;
+}
+
+.doc-col-card strong {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.doc-col-card .doc-callout {
+  margin-top: auto;
+  margin-bottom: 0;
+  padding: 14px 16px;
+  background: #ffffff;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-left: 3px solid #f59e0b;
+  border-radius: 8px;
+}
+
+.doc-col-card .doc-callout p {
+  font-size: 14.5px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .doc-grid-3col {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .doc-grid-2col {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin: 20px 0 24px;
+  }
 }
 .doc-content li {
-  margin-bottom: 9px;
+  margin-bottom: 7px;
 }
 .doc-content li strong, .doc-content p strong {
   color: var(--text-primary);
@@ -367,42 +612,281 @@
   color: #1d4ed8;
 }
 
+/* Focused Dialogue / Inquiry Quotes */
+.doc-content .doc-quote-focus {
+  margin: 20px 0 22px;
+  padding: 14px 20px;
+  background: rgba(37, 99, 235, 0.04);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  font-family: var(--font-serif);
+  font-size: 17.5px;
+  font-weight: 600;
+  line-height: 1.55;
+  color: var(--color-navy);
+  font-style: italic;
+}
+.doc-content .doc-quote-focus p {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+/* Callout / Takeaway Box */
+.doc-callout {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin: 24px 0;
+  padding: 16px 20px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid var(--color-orange);
+  border-radius: 0 8px 8px 0;
+}
+.doc-callout-icon {
+  font-size: 20px;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+.doc-callout-content {
+  flex: 1;
+}
+.doc-callout-content p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1e293b;
+}
+.doc-callout-content p + p {
+  margin-top: 8px;
+}
+
+/* Summary Box */
+.doc-summary-box {
+  margin: 44px 0 28px;
+  padding: 24px 28px 20px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+}
+.doc-summary-box .summary-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  margin-bottom: 16px;
+  background: var(--color-navy);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+.doc-summary-box .summary-body p {
+  margin: 0 0 12px;
+  font-size: 16px;
+  line-height: 1.62;
+  color: #334155;
+}
+.doc-summary-box .summary-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Next Chapter Teaser */
+.doc-next-teaser {
+  margin: 36px 0 16px;
+  padding: 22px 26px;
+  background: rgba(249, 115, 22, 0.05);
+  border: 1px solid rgba(249, 115, 22, 0.22);
+  border-left: 4px solid var(--color-orange);
+  border-radius: 0 10px 10px 0;
+}
+.doc-next-teaser .teaser-badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-orange-dark);
+  margin-bottom: 6px;
+}
+.doc-next-teaser .teaser-title {
+  margin: 0 0 10px;
+  font-family: var(--font-sans);
+  font-size: 18.5px;
+  font-weight: 700;
+  color: var(--color-navy);
+  line-height: 1.38;
+}
+.doc-next-teaser .teaser-body p {
+  margin: 0 0 10px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: #334155;
+}
+.doc-next-teaser .teaser-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Chapter 10: Tool Cards */
+.tool-card {
+  margin: 26px 0;
+  padding: 22px 24px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+}
+.tool-card .tool-title {
+  margin: 0 0 12px;
+  font-family: var(--font-sans);
+  font-size: 19.5px;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+.tool-card p {
+  margin: 0 0 12px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #334155;
+}
+.tool-action {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border);
+}
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  background: var(--color-navy);
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 14.5px;
+  border-radius: 7px;
+  text-decoration: none !important;
+  box-shadow: 0 3px 8px rgba(10, 25, 49, 0.18);
+  transition: background-color .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+.btn-download:hover {
+  background: var(--color-orange);
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(249, 115, 22, 0.28);
+}
+
+/* Chapter 11: FAQ Items */
+.faq-item {
+  margin: 24px 0;
+  padding: 20px 24px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+}
+.faq-item .faq-question {
+  margin: 0 0 12px;
+  font-family: var(--font-sans);
+  font-size: 18.5px;
+  font-weight: 700;
+  color: var(--color-navy);
+  line-height: 1.42;
+}
+.faq-item .faq-answer p {
+  margin: 0 0 10px;
+  font-size: 16px;
+  line-height: 1.62;
+  color: #334155;
+}
+.faq-item .faq-answer p:last-child {
+  margin-bottom: 0;
+}
+
+/* Chapter 12: Epilogue Manifesto */
+.doc-epilogue {
+  margin: 40px 0 20px;
+  padding: 32px 30px;
+  background: linear-gradient(135deg, #0a1931 0%, #1e3a5f 100%);
+  color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(10, 25, 49, 0.22);
+}
+.doc-epilogue .epilogue-title {
+  margin: 0 0 16px;
+  font-family: var(--font-sans);
+  font-size: 22px;
+  font-weight: 800;
+  color: #fb923c;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  text-align: center;
+}
+.doc-epilogue p {
+  margin: 0 0 14px;
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: #f1f5f9;
+}
+.doc-epilogue .doc-quote-focus {
+  background: rgba(255, 255, 255, 0.12);
+  border-left-color: #fb923c;
+  color: #ffffff;
+  margin: 20px 0;
+}
+.doc-epilogue .epilogue-signature {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: var(--font-serif);
+  font-size: 17.5px;
+  font-weight: 700;
+  color: #fb923c;
+  text-align: right;
+  letter-spacing: 0.5px;
+}
+
 /* Bảng dữ liệu / so sánh tối giản: viền xám nhạt, không bóng đổ */
 .doc-content table {
   width: 100%;
   border-collapse: collapse;
-  margin: 36px 0;
+  margin: 28px 0;
   border: 1px solid var(--border);
 }
 .doc-content th {
   background: var(--surface-muted);
   border: 1px solid var(--border);
-  padding: 13px 18px;
+  padding: 11px 16px;
   text-align: left;
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 15px;
+  font-size: 14.5px;
   color: var(--text-primary);
 }
 .doc-content td {
   border: 1px solid var(--border);
-  padding: 14px 18px;
-  font-size: 16px;
-  line-height: 1.65;
+  padding: 12px 16px;
+  font-size: 15.5px;
+  line-height: 1.58;
   color: #334155;
 }
 
 /* Khối lưu ý / trích dẫn: thanh viền trái trung tính, nền xám siêu nhạt, không bo góc */
 .doc-content blockquote {
-  margin: 36px 0;
-  padding: 20px 24px;
+  margin: 28px 0;
+  padding: 16px 20px;
   border-left: 3px solid #94a3b8;
   background: var(--surface-muted);
   border-radius: 0;
   color: var(--text-primary);
   font-style: normal;
-  font-size: 16.5px;
-  line-height: 1.7;
+  font-size: 16px;
+  line-height: 1.62;
 }
 .doc-content blockquote strong {
   color: var(--text-primary);
@@ -415,6 +899,99 @@
   border-radius: 3px;
   font-size: 88%;
   color: var(--text-primary);
+}
+
+/* =========================================================
+   MEDIA ROW: ẢNH VUÔNG BÊN TRÁI, NỘI DUNG BÊN PHẢI (Side-by-side)
+   Giúp bố cục rút gọn, không bị dàn trải, ảnh không bị phóng to quá
+   ========================================================= */
+.doc-media-row {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 28px;
+  align-items: start;
+  margin: 20px 0 26px;
+}
+
+.doc-media-row .doc-figure-side {
+  margin: 0;
+  text-align: center;
+  position: sticky;
+  top: calc(var(--topbar-h) + 20px);
+}
+
+.doc-media-row .doc-figure-side img {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  max-height: 420px;
+  object-fit: contain;
+  margin: 0 auto;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 8px 24px -6px rgba(10, 25, 49, 0.09);
+  background-color: #ffffff;
+}
+
+.doc-media-row .doc-figure-side figcaption {
+  margin-top: 10px;
+  font-size: 13.5px;
+  color: #64748b;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.doc-media-row .doc-media-text p {
+  margin: 0 0 13px;
+  font-size: 16.5px;
+  line-height: 1.62;
+  color: #334155;
+}
+
+.doc-media-row .doc-media-text .doc-callout {
+  margin: 16px 0 0;
+  padding: 14px 18px;
+}
+
+/* Khung hình ảnh minh họa / Infographic chuẩn responsive (ngang) */
+.doc-figure {
+  margin: 32px auto;
+  text-align: center;
+  max-width: 100%;
+}
+
+.doc-figure img {
+  display: block;
+  max-width: 100%;
+  max-height: 480px;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 10px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 6px 20px -6px rgba(10, 25, 49, 0.08);
+  background-color: #ffffff;
+}
+
+.doc-figure figcaption {
+  margin-top: 10px;
+  font-size: 13.5px;
+  color: #64748b;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+@media (max-width: 768px) {
+  .doc-media-row {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .doc-media-row .doc-figure-side {
+    position: static;
+  }
+  .doc-media-row .doc-figure-side img {
+    max-width: 260px;
+  }
 }
 
 /* Hộp công cụ / checklist phẳng, không viền dày, không card */
@@ -442,15 +1019,78 @@
 
 /* =========================================================
    3. ĐIỀU HƯỚNG CHƯƠNG Ở CUỐI (Linear Previous / Next Navigation)
-   - Không dùng card hay bóng đổ
-   - Dạng text link 2 cột thanh lịch, ngăn cách bởi đường kẻ ngang mảnh
    ========================================================= */
 .doc-next {
   display: block;
-  max-width: var(--content-width);
-  margin: 0 auto;
-  padding: 44px 24px 120px;
-  border-top: 1px solid var(--border);
+  margin-top: 44px;
+  padding-top: 32px;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Next Chapter Banner phong cách Autism Speaks */
+.doc-next-banner-wrap {
+  margin-bottom: 28px;
+}
+
+.doc-next-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: #2563eb;
+  color: #ffffff !important;
+  border-radius: 8px;
+  text-decoration: none !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.22);
+  transition: background-color .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+
+.doc-next-banner:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.32);
+}
+
+.doc-next-banner .next-banner-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.doc-next-banner .next-banner-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.doc-next-banner .next-banner-title {
+  font-size: 17.5px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.35;
+}
+
+.doc-next-banner .next-banner-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  flex-shrink: 0;
+  margin-left: 16px;
+  transition: transform .18s ease, background .18s ease;
+}
+
+.doc-next-banner:hover .next-banner-arrow {
+  transform: translateX(4px);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .doc-pagination {
