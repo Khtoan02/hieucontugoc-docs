@@ -292,6 +292,95 @@
       paginationHtml += '</nav>';
       nextCard.innerHTML = fullNavHtml + paginationHtml;
     }
+
+    /* Kích hoạt animation xuất hiện êm ái cho heading, text và các khối nội dung */
+    initScrollAnimations();
+  }
+
+  /* =======================================================
+     4b. HIỆU ỨNG HIỂN THỊ CÁC THÀNH PHẦN (Smooth Reveal Animations)
+     ======================================================= */
+  var scrollObserver = null;
+
+  function initScrollAnimations() {
+    // Nếu thiết bị bật reduced motion thì giữ hiển thị tĩnh
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    if (scrollObserver) {
+      scrollObserver.disconnect();
+    }
+
+    var content = document.querySelector(".doc-content, .doc-cover");
+    if (!content) return;
+
+    // Các phần tử khối cần áp dụng hiệu ứng xuất hiện êm ái
+    var targets = content.querySelectorAll(
+      "h2, h3, .lead-p, p, .doc-callout, .doc-figure, .doc-media-row, " +
+      ".doc-grid-2col, blockquote, .doc-quote-focus, .doc-summary-box, " +
+      ".doc-next-teaser, .doc-epilogue, .tool-card, .faq-item, " +
+      ".doc-next-banner-wrap, .doc-pagination, .toc-entry"
+    );
+
+    if (!targets || !targets.length) return;
+
+    // Lọc bỏ các thẻ <p> nằm bên trong các khối phức hợp để tránh lồng animation
+    var filteredTargets = [];
+    targets.forEach(function (el) {
+      if (el.tagName === "P" && el.closest(".doc-callout, .doc-col-card, .doc-media-text, .doc-summary-box, .doc-epilogue, .tool-card, .faq-item, .doc-next-teaser")) {
+        return;
+      }
+      filteredTargets.push(el);
+    });
+
+    if (!("IntersectionObserver" in window)) {
+      filteredTargets.forEach(function (el) {
+        el.classList.add("reveal-item", "is-revealed");
+      });
+      return;
+    }
+
+    scrollObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, i) {
+        if (entry.isIntersecting) {
+          var target = entry.target;
+          var delay = (i % 3) * 45; // Stagger nhẹ nhàng 45ms
+          if (delay > 0) {
+            setTimeout(function () {
+              target.classList.add("is-revealed");
+            }, delay);
+          } else {
+            target.classList.add("is-revealed");
+          }
+          scrollObserver.unobserve(target);
+        }
+      });
+    }, {
+      threshold: 0.05,
+      rootMargin: "0px 0px 50px 0px"
+    });
+
+    var winH = window.innerHeight || 800;
+    var initialInView = [];
+
+    filteredTargets.forEach(function (el) {
+      el.classList.add("reveal-item");
+      var rect = el.getBoundingClientRect();
+      if (rect.top < winH && rect.bottom > 0) {
+        initialInView.push(el);
+      } else {
+        scrollObserver.observe(el);
+      }
+    });
+
+    // Các phần tử đầu trang đã nằm trong màn hình: xuất hiện tuần tự êm dịu
+    initialInView.forEach(function (el, idx) {
+      var initialDelay = Math.min(idx * 50, 250);
+      setTimeout(function () {
+        el.classList.add("is-revealed");
+      }, initialDelay);
+    });
   }
 
   /* Khởi tạo trang lần đầu */

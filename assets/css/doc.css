@@ -244,6 +244,7 @@
   align-items: center;
   text-align: center;
   gap: 16px;
+  animation: pageHeadFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* Thanh tiện ích / điều hướng đầu trang */
@@ -263,6 +264,7 @@
   font-size: 13px;
   color: #f8fafc;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  animation: gentleFadeDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .doc-page-meta .eyebrow {
@@ -316,6 +318,7 @@
   text-align: center;
   box-shadow: 0 10px 30px rgba(10, 25, 49, 0.35);
   max-width: 100%;
+  animation: pageHeadFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
 }
 
 .doc-page-divider {
@@ -1245,12 +1248,12 @@ figcaption,
 }
 
 /* =========================================================
-   4. HIỆU ỨNG CHUYỂN ĐỘNG (60/120 FPS Hardware-Accelerated)
+   4. HIỆU ỨNG CHUYỂN ĐỘNG & XUẤT HIỆN ÊM ÁI (60/120 FPS Fluid Motion)
    ========================================================= */
 @keyframes cardFadeUp {
   from {
     opacity: 0;
-    transform: translateY(22px) scale(0.985);
+    transform: translateY(20px) scale(0.988);
   }
   to {
     opacity: 1;
@@ -1261,7 +1264,18 @@ figcaption,
 @keyframes pageHeadFadeIn {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gentleFadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
   }
   to {
     opacity: 1;
@@ -1277,6 +1291,148 @@ figcaption,
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Hệ thống Scroll Reveal: các phần tử xuất hiện êm ái khi cuộn trang */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.58s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.58s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-item.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tinh chỉnh riêng cho các Heading h2 (Banners) */
+.doc-content h2.reveal-item {
+  transform: translateY(18px) scale(0.995);
+  transition: opacity 0.62s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.62s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.62s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.doc-content h2.reveal-item.is-revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Tinh chỉnh riêng cho Heading h3 */
+.doc-content h3.reveal-item {
+  transform: translateY(12px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.doc-content h3.reveal-item.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tinh chỉnh cho lưới 2 cột (.doc-grid-2col): Stagger 2 thẻ cạnh nhau */
+.doc-grid-2col.reveal-item {
+  transform: none;
+}
+.doc-grid-2col.reveal-item .doc-col-card {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.doc-grid-2col.reveal-item.is-revealed .doc-col-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+.doc-grid-2col.reveal-item.is-revealed .doc-col-card:nth-child(2) {
+  transition-delay: 0.09s;
+}
+
+/* Tinh chỉnh cho khối tóm tắt chương (.doc-summary-box) */
+.doc-summary-box.reveal-item {
+  transform: translateY(18px);
+  transition: opacity 0.62s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.62s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.doc-summary-box.reveal-item.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tinh chỉnh cho khối trích dẫn (.doc-quote-focus) */
+.doc-quote-focus.reveal-item {
+  transform: translateY(12px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.doc-quote-focus.reveal-item.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tinh chỉnh cho ảnh minh họa (.doc-figure, .doc-media-row) */
+.doc-figure.reveal-item,
+.doc-media-row.reveal-item {
+  transform: translateY(18px);
+  transition: opacity 0.62s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.62s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.doc-figure.reveal-item.is-revealed,
+.doc-media-row.reveal-item.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tinh chỉnh cho hộp lưu ý (.doc-callout) */
+.doc-callout.reveal-item {
+  transform: translateY(14px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.doc-callout.reveal-item.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Khối Epilogue tuyên ngôn cuối chương 12 (.doc-epilogue) */
+.doc-epilogue.reveal-item {
+  transform: translateY(18px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.doc-epilogue.reveal-item.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tương thích hoàn hảo View Transitions: khi trượt ngang, giữ nguyên snapshot đầy đủ */
+html[data-nav-dir] .reveal-item,
+html[data-nav-dir] .doc-grid-2col.reveal-item .doc-col-card,
+html[data-nav-dir] .doc-page-head .inner,
+html[data-nav-dir] .doc-page-meta,
+html[data-nav-dir] .doc-page-head h1 {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Hỗ trợ chế độ giảm chuyển động của người dùng */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-item,
+  .doc-grid-2col.reveal-item .doc-col-card,
+  .doc-page-head .inner,
+  .doc-page-meta,
+  .doc-page-head h1,
+  .hub-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
   }
 }
 
@@ -1422,7 +1578,12 @@ figcaption,
               box-shadow .22s cubic-bezier(0.16, 1, 0.3, 1),
               border-color .2s ease;
   box-shadow: 0 4px 16px -3px rgba(10, 25, 49, 0.05);
+  animation: cardFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+
+.hub-card:nth-child(1) { animation-delay: 0.04s; }
+.hub-card:nth-child(2) { animation-delay: 0.12s; }
+.hub-card:nth-child(3) { animation-delay: 0.20s; }
 
 .hub-card:hover {
   transform: translateY(-4px);
