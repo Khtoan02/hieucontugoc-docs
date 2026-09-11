@@ -1487,6 +1487,7 @@
   justify-content: center;
   gap: 8px;
   width: 100%;
+  box-sizing: border-box;
   padding: 12px 18px;
   border-radius: 8px;
   font-size: 14.5px;
@@ -1552,17 +1553,17 @@
 }
 
 /* Tối ưu giao diện điện thoại: Đảm bảo vừa vặn trọn vẹn đúng trong 1 màn hình */
+/* Tối ưu giao diện điện thoại: 3 nút 3 hàng tinh gọn, vừa vặn trọn vẹn 1 màn hình */
 @media (max-width: 640px) {
   html, body.hub-page {
     height: 100dvh;
     min-height: 100dvh;
-    max-height: 100dvh;
     overflow: hidden;
   }
 
   body.hub-page {
     padding-top: var(--topbar-h, 52px);
-    padding-bottom: 12px;
+    padding-bottom: 16px;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -1571,127 +1572,94 @@
 
   .hub-head {
     min-height: auto;
-    padding: 12px 16px 10px;
+    padding: 16px 16px 14px;
     flex-shrink: 0;
     background-size: cover;
     background-position: center 35%;
   }
 
   .hub-head-inner {
-    gap: 4px;
+    gap: 6px;
   }
 
   .hub-eyebrow {
-    padding: 2px 10px;
-    font-size: 10px;
+    padding: 3px 10px;
+    font-size: 10.5px;
     letter-spacing: 0.6px;
     gap: 4px;
   }
 
   .hub-head h1 {
-    padding: 6px 14px;
-    font-size: 14px;
-    letter-spacing: 0.2px;
+    padding: 8px 16px;
+    font-size: 15px;
+    letter-spacing: 0.3px;
     border-radius: 6px;
-    line-height: 1.25;
+    line-height: 1.3;
   }
 
   .hub-content {
-    width: calc(100% - 24px);
-    margin: 8px auto 0;
-    padding: 12px 14px;
-    border-radius: 12px;
-    flex: 1;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    width: auto;
+    margin: 14px 16px 0;
+    padding: 16px 14px 18px;
+    border-radius: 14px;
     box-sizing: border-box;
     box-shadow: 0 4px 16px -2px rgba(10, 25, 49, 0.06);
   }
 
   .hub-doc-notice {
-    padding: 8px 12px;
-    margin-bottom: 10px;
+    padding: 9px 12px;
+    margin-bottom: 14px;
     border-radius: 8px;
     gap: 8px;
-    flex-shrink: 0;
   }
 
   .hub-doc-notice .notice-icon {
-    font-size: 16px;
+    font-size: 17px;
   }
 
   .hub-doc-notice .notice-text {
-    font-size: 12.5px;
-    line-height: 1.35;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 13px;
+    line-height: 1.4;
   }
 
   .hub-doc-notice strong {
-    font-size: 12.5px;
+    font-size: 13px;
   }
 
+  /* 3 nút 3 hàng trên điện thoại */
   .hub-grid {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    flex: 1;
-    min-height: 0;
-    justify-content: space-evenly;
+    gap: 11px;
     margin-bottom: 0;
   }
 
   .hub-card {
-    padding: 10px 12px 10px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    box-shadow: 0 2px 8px -2px rgba(10, 25, 49, 0.04);
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
   }
 
-  .hub-card-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 2px;
-  }
-
-  .hub-card-icon {
-    display: none;
-  }
-
-  .hub-card-badge {
-    margin-bottom: 0;
-    padding: 2px 8px;
-    font-size: 10px;
-    line-height: 1.2;
-    flex-shrink: 0;
-  }
-
-  .hub-card-title {
-    font-size: 14.5px;
-    margin: 0;
-    line-height: 1.2;
-    white-space: nowrap;
-  }
-
+  .hub-card-header,
   .hub-card-desc {
-    font-size: 11.5px;
-    line-height: 1.35;
-    margin: 0 0 6px;
-    color: #475569;
-    flex-grow: 0;
+    display: none !important;
   }
 
   .hub-card-btn {
-    padding: 8px 14px;
-    font-size: 12.5px;
-    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 10px;
+    font-size: 13px;
     font-weight: 700;
+    letter-spacing: 0.1px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(10, 25, 49, 0.08);
   }
 }
 
