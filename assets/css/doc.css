@@ -1767,16 +1767,10 @@ html[data-nav-dir] .doc-page-head h1 {
   }
 }
 
-/* Tối ưu giao diện điện thoại: Đảm bảo vừa vặn trọn vẹn đúng trong 1 màn hình */
-/* Tối ưu giao diện điện thoại: 3 nút 3 hàng tinh gọn, vừa vặn trọn vẹn 1 màn hình */
+/* Tối ưu giao diện điện thoại: 3 nút 3 hàng tinh gọn */
 @media (max-width: 640px) {
-  html, body.hub-page {
-    height: 100dvh;
-    min-height: 100dvh;
-    overflow: hidden;
-  }
-
   body.hub-page {
+    min-height: 100dvh;
     padding-top: var(--topbar-h, 52px);
     padding-bottom: 16px;
     display: flex;
