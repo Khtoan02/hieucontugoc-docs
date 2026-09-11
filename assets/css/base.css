@@ -347,7 +347,7 @@ img { max-width: 100%; height: auto; }
   position: fixed;
   right: 22px;
   bottom: 22px;
-  z-index: 35;
+  z-index: 99;
   display: flex;
   gap: 10px;
   view-transition-name: site-arrows;
@@ -360,20 +360,28 @@ img { max-width: 100%; height: auto; }
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--color-border);
+  border: 1.5px solid rgba(10, 25, 49, 0.12);
   border-radius: 50%;
-  background: rgba(255, 255, 255, .95);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--color-navy);
-  box-shadow: 0 4px 14px rgba(10, 25, 49, .12);
+  box-shadow: 0 6px 18px rgba(10, 25, 49, 0.14);
 }
 .doc-arrows a:hover {
   background: var(--color-orange);
   border-color: var(--color-orange);
   color: #fff;
+  transform: scale(1.08);
+  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.35);
+}
+.doc-arrows a:active {
+  transform: scale(0.95);
 }
 .doc-arrows .arrow-off {
-  opacity: .35;
+  opacity: .3;
   cursor: default;
+  pointer-events: none;
 }
 
 /* Nhãn tên trang hiện khi rê chuột */
@@ -472,27 +480,73 @@ img { max-width: 100%; height: auto; }
 }
 
 /* =========================================================
-   5. VIEW TRANSITIONS API — Chuyển trang mượt mà chuẩn hiện đại
+   5. VIEW TRANSITIONS API — Chuyển trang trượt ngang phẳng (Page Slide)
    ========================================================= */
 @view-transition {
   navigation: auto;
 }
 
+/* Keyframes trượt ngang phẳng (Flat Page Slide) */
+@keyframes slideOutLeft {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(-100%); opacity: 0.96; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0.96; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOutRight {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0.96; }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); opacity: 0.96; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Mặc định: hiệu ứng trượt sang trái khi xem trang kế tiếp (Next) */
 ::view-transition-old(root) {
-  animation: 0.22s cubic-bezier(0.4, 0, 1, 1) both pageFadeOut;
+  animation: 0.28s cubic-bezier(0.2, 0.9, 0.3, 1) both slideOutLeft;
 }
 ::view-transition-new(root) {
-  animation: 0.32s cubic-bezier(0.16, 1, 0.3, 1) both pageFadeInSlide;
+  animation: 0.28s cubic-bezier(0.2, 0.9, 0.3, 1) both slideInRight;
+}
+
+/* Khi lật trang kế tiếp (Next / Vuốt trái) */
+html[data-nav-dir="next"] ::view-transition-old(root) {
+  animation: 0.28s cubic-bezier(0.2, 0.9, 0.3, 1) both slideOutLeft;
+}
+html[data-nav-dir="next"] ::view-transition-new(root) {
+  animation: 0.28s cubic-bezier(0.2, 0.9, 0.3, 1) both slideInRight;
+}
+
+/* Khi quay lại trang trước (Prev / Vuốt phải) */
+html[data-nav-dir="prev"] ::view-transition-old(root) {
+  animation: 0.28s cubic-bezier(0.2, 0.9, 0.3, 1) both slideOutRight;
+}
+html[data-nav-dir="prev"] ::view-transition-new(root) {
+  animation: 0.28s cubic-bezier(0.2, 0.9, 0.3, 1) both slideInLeft;
+}
+
+/* Chuyển trang qua Menu hoặc không xác định hướng: fade mượt */
+html[data-nav-dir="fade"] ::view-transition-old(root) {
+  animation: 0.2s ease both pageFadeOut;
+}
+html[data-nav-dir="fade"] ::view-transition-new(root) {
+  animation: 0.25s ease both pageFadeIn;
 }
 
 @keyframes pageFadeOut {
-  from { opacity: 1; transform: translateY(0) scale(1); }
-  to { opacity: 0; transform: translateY(-6px) scale(0.995); }
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
-@keyframes pageFadeInSlide {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @media (max-width: 700px) {

@@ -135,7 +135,7 @@
     return (
       '<span class="arrow-wrap">' +
       '<span class="arrow-label">' + label + ": " + page.title + "</span>" +
-      '<a href="' + href(page.file) + '" aria-label="' + label + ": " + page.title + '">' + ICON[dir] + "</a>" +
+      '<a href="' + href(page.file) + '" data-nav-dir="' + dir + '" aria-label="' + label + ": " + page.title + '">' + ICON[dir] + "</a>" +
       "</span>"
     );
   }
@@ -150,8 +150,8 @@
   document.addEventListener("keydown", function (e) {
     if (e.target.matches("input, textarea")) return;
     if (e.key === "Escape" && !overlay.hidden) return setMenu(false);
-    if (e.key === "ArrowLeft" && prev) navigateDoc(href(prev.file));
-    if (e.key === "ArrowRight" && next) navigateDoc(href(next.file));
+    if (e.key === "ArrowLeft" && prev) navigateDoc(href(prev.file), false, "prev");
+    if (e.key === "ArrowRight" && next) navigateDoc(href(next.file), false, "next");
   });
 
   /* =======================================================
@@ -216,13 +216,13 @@
 
         var topNavHtml = "";
         if (prev) {
-          topNavHtml += '<a href="' + href(prev.file) + '">← Trước</a>';
+          topNavHtml += '<a href="' + href(prev.file) + '" data-nav-dir="prev">← Trước</a>';
         }
         if (prev && next) {
           topNavHtml += '<span class="sep">·</span>';
         }
         if (next) {
-          topNavHtml += '<a href="' + href(next.file) + '">Sau →</a>';
+          topNavHtml += '<a href="' + href(next.file) + '" data-nav-dir="next">Sau →</a>';
         }
 
         metaEl.innerHTML =
@@ -243,7 +243,7 @@
       if (next) {
         fullNavHtml +=
           '<div class="doc-next-banner-wrap">' +
-          '<a class="doc-next-banner" href="' + href(next.file) + '">' +
+          '<a class="doc-next-banner" href="' + href(next.file) + '" data-nav-dir="next">' +
           '<div class="next-banner-meta">' +
           '<span class="next-banner-label">Đọc tiếp chương sau</span>' +
           '<span class="next-banner-title">' + next.title + '</span>' +
@@ -254,7 +254,7 @@
       } else {
         fullNavHtml +=
           '<div class="doc-next-banner-wrap">' +
-          '<a class="doc-next-banner" href="' + href("index") + '">' +
+          '<a class="doc-next-banner" href="' + href("index") + '" data-nav-dir="prev">' +
           '<div class="next-banner-meta">' +
           '<span class="next-banner-label">Hoàn thành ' + (pages.length - 1) + ' chương</span>' +
           '<span class="next-banner-title">Quay về trang bìa tài liệu</span>' +
@@ -268,7 +268,7 @@
       if (prev) {
         var prevLabel = prev.file === "index" ? "Về trang bìa" : "Chương trước";
         paginationHtml +=
-          '<a class="doc-page-link is-prev" href="' + href(prev.file) + '">' +
+          '<a class="doc-page-link is-prev" href="' + href(prev.file) + '" data-nav-dir="prev">' +
           '<span class="nav-direction">← ' + prevLabel + '</span>' +
           '<span class="nav-title">' + prev.title + '</span>' +
           '</a>';
@@ -278,13 +278,13 @@
 
       if (next) {
         paginationHtml +=
-          '<a class="doc-page-link is-next" href="' + href(next.file) + '">' +
+          '<a class="doc-page-link is-next" href="' + href(next.file) + '" data-nav-dir="next">' +
           '<span class="nav-direction">Chương tiếp theo →</span>' +
           '<span class="nav-title">' + next.title + '</span>' +
           '</a>';
       } else {
         paginationHtml +=
-          '<a class="doc-page-link is-next" href="' + href("index") + '">' +
+          '<a class="doc-page-link is-next" href="' + href("index") + '" data-nav-dir="prev">' +
           '<span class="nav-direction">Hoàn thành tài liệu →</span>' +
           '<span class="nav-title">Về trang bìa</span>' +
           '</a>';
@@ -314,8 +314,25 @@
   if (next) preloadPage(href(next.file));
   if (prev) preloadPage(href(prev.file));
 
-  function navigateDoc(targetUrl, isPopState) {
+  function navigateDoc(targetUrl, isPopState, explicitDir) {
     if (!targetUrl) return;
+
+    // Xác định chiều chuyển trang (next / prev / fade)
+    var urlObj = new URL(targetUrl, location.href);
+    var targetFile = urlObj.pathname.replace(docFolder, "").replace(/^\/+/, "").replace(/\.html$/, "");
+    if (!targetFile) targetFile = "index";
+    var targetIdx = getPageIndex(targetFile);
+
+    var dir = explicitDir;
+    if (!dir) {
+      if (targetIdx > -1 && index > -1) {
+        if (targetIdx > index) dir = "next";
+        else if (targetIdx < index) dir = "prev";
+        else dir = "fade";
+      } else {
+        dir = "next";
+      }
+    }
 
     var cachedHtml = pageCache[targetUrl];
     var fetchPromise = cachedHtml
@@ -394,10 +411,22 @@
           if (prev) preloadPage(href(prev.file));
         }
 
+        document.documentElement.setAttribute("data-nav-dir", dir);
+
         if (document.startViewTransition) {
-          document.startViewTransition(updateDOM);
+          var transition = document.startViewTransition(updateDOM);
+          if (transition && transition.finished) {
+            transition.finished.finally(function () {
+              document.documentElement.removeAttribute("data-nav-dir");
+            });
+          } else {
+            setTimeout(function () {
+              document.documentElement.removeAttribute("data-nav-dir");
+            }, 350);
+          }
         } else {
           updateDOM();
+          document.documentElement.removeAttribute("data-nav-dir");
         }
       })
       .catch(function () {
@@ -437,7 +466,8 @@
     var targetFolder = getDocFolder(url.pathname);
     if (targetFolder === docFolder && isDocChapter(url.pathname)) {
       e.preventDefault();
-      navigateDoc(link.href, false);
+      var explicitDir = link.getAttribute("data-nav-dir");
+      navigateDoc(link.href, false, explicitDir || undefined);
     }
   });
 
@@ -459,7 +489,77 @@
   });
 
   /* =======================================================
-     6. Vercel Web Analytics
+     6. CỬ CHỈ VUỐT CHUYỂN TRANG TRÊN ĐIỆN THOẠI (Touch Swipe Engine)
+     ======================================================= */
+  var touchStartX = 0;
+  var touchStartY = 0;
+  var touchStartTime = 0;
+  var touchLocked = false;
+  var isHorizontalSwipe = false;
+
+  document.addEventListener("touchstart", function (e) {
+    if (e.touches.length !== 1) return;
+    // Bỏ qua nếu menu mục lục đang mở hoặc chạm vào nút bấm/ô nhập liệu
+    if (!overlay.hidden) return;
+    if (e.target.closest("button, input, textarea, a, select, table, .doc-arrows")) return;
+
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchStartTime = Date.now();
+    touchLocked = false;
+    isHorizontalSwipe = false;
+  }, { passive: true });
+
+  document.addEventListener("touchmove", function (e) {
+    if (touchLocked || e.touches.length !== 1) return;
+
+    var currentX = e.touches[0].clientX;
+    var currentY = e.touches[0].clientY;
+    var dx = currentX - touchStartX;
+    var dy = currentY - touchStartY;
+    var absDx = Math.abs(dx);
+    var absDy = Math.abs(dy);
+
+    // Khóa hướng vuốt: nếu vuốt dọc để đọc bài, để trình duyệt cuộn tự nhiên 100%
+    if (absDy > absDx && absDy > 8) {
+      touchLocked = true;
+      isHorizontalSwipe = false;
+      return;
+    }
+
+    // Nếu người dùng cố ý vuốt ngang rõ rệt
+    if (absDx > absDy * 1.3 && absDx > 12) {
+      touchLocked = true;
+      isHorizontalSwipe = true;
+    }
+  }, { passive: true });
+
+  document.addEventListener("touchend", function (e) {
+    if (!isHorizontalSwipe || e.changedTouches.length !== 1) return;
+
+    var endX = e.changedTouches[0].clientX;
+    var totalDx = endX - touchStartX;
+    var dt = Date.now() - touchStartTime;
+
+    // Ngưỡng vuốt: tối thiểu 45px hoặc 25px với tốc độ lướt nhanh (< 250ms)
+    var isValidSwipe = Math.abs(totalDx) > 45 || (Math.abs(totalDx) > 25 && dt < 250);
+
+    if (isValidSwipe) {
+      if (totalDx < 0 && next) {
+        // Vuốt từ phải qua trái -> Sang chương tiếp theo
+        navigateDoc(href(next.file), false, "next");
+      } else if (totalDx > 0 && prev) {
+        // Vuốt từ trái qua phải -> Quay về chương trước
+        navigateDoc(href(prev.file), false, "prev");
+      }
+    }
+
+    isHorizontalSwipe = false;
+    touchLocked = false;
+  }, { passive: true });
+
+  /* =======================================================
+     7. Vercel Web Analytics
      ======================================================= */
   if (!window.va) {
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
