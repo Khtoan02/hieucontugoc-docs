@@ -1,10 +1,10 @@
 /* =========================================================
    data.js — KHAI BÁO TOÀN BỘ TÀI LIỆU
-   Hiểu Giác Quan & Cách Não Xử Lý Thông Tin
+   HIỂU GIÁC QUAN & CÁCH NÃO XỬ LÝ THÔNG TIN
    ========================================================= */
 
 window.DOC_DATA = {
-  title: "Hiểu Giác Quan & Cách Não Xử Lý Thông Tin",
+  title: "HIỂU GIÁC QUAN & CÁCH NÃO XỬ LÝ THÔNG TIN",
   subtitle: "Cẩm nang toàn diện về giác quan, điều hòa và cách đồng hành cùng con từ gốc rễ.",
   /* Ảnh nền trang bìa */
   cover: "/assets/img/2.jpg",
@@ -17,19 +17,19 @@ window.DOC_DATA = {
      trước/sau. Trang bìa luôn là mục đầu tiên.
      --------------------------------------------------------- */
   pages: [
-    { title: "Trang bìa",                                      file: "index" },
-    { title: "1. Hiểu giác quan và cách não xử lý thông tin",  file: "hieu-giac-quan" },
-    { title: "2. Từ điều hòa đến quá tải giác quan",           file: "tu-dieu-hoa-den-qua-tai" },
-    { title: "3. Khi quá tải biểu hiện thành hành vi",         file: "khi-qua-tai-thanh-hanh-vi" },
-    { title: "4. Bản đồ các hệ giác quan của cơ thể",          file: "ban-do-cac-he-giac-quan" },
+    { title: "Trang bìa", file: "index" },
+    { title: "1. Hiểu giác quan và cách não xử lý thông tin", file: "hieu-giac-quan" },
+    { title: "2. Từ điều hòa đến quá tải giác quan", file: "tu-dieu-hoa-den-qua-tai" },
+    { title: "3. Khi quá tải biểu hiện thành hành vi", file: "khi-qua-tai-thanh-hanh-vi" },
+    { title: "4. Bản đồ các hệ giác quan của cơ thể", file: "ban-do-cac-he-giac-quan" },
     { title: "5. Trẻ phản ứng với cảm giác theo những cách nào", file: "phan-ung-voi-cam-giac" },
-    { title: "6. Giác quan không tồn tại tách biệt",           file: "giac-quan-khong-tach-biet" },
-    { title: "7. Ba mẹ nên quan sát con như thế nào?",         file: "ba-me-quan-sat-con" },
-    { title: "8. Hỗ trợ trẻ khi khó điều hòa",                 file: "ho-tro-tre-kho-dieu-hoa" },
-    { title: "9. Khi nào cần nhìn xa hơn giác quan?",          file: "khi-nao-nhin-xa-hon" },
-    { title: "10. Bộ công cụ hiểu giác quan của con",          file: "bo-cong-cu" },
-    { title: "11. Những câu hỏi ba mẹ thường gặp (FAQ)",       file: "cau-hoi-thuong-gap" },
-    { title: "12. Hiểu con trước khi cố thay đổi con",         file: "hieu-con-truoc-khi-thay-doi" }
+    { title: "6. Giác quan không tồn tại tách biệt", file: "giac-quan-khong-tach-biet" },
+    { title: "7. Ba mẹ nên quan sát con như thế nào?", file: "ba-me-quan-sat-con" },
+    { title: "8. Hỗ trợ trẻ khi khó điều hòa", file: "ho-tro-tre-kho-dieu-hoa" },
+    { title: "9. Khi nào cần nhìn xa hơn giác quan?", file: "khi-nao-nhin-xa-hon" },
+    { title: "10. Bộ công cụ hiểu giác quan của con", file: "bo-cong-cu" },
+    { title: "11. Những câu hỏi ba mẹ thường gặp (FAQ)", file: "cau-hoi-thuong-gap" },
+    { title: "12. Hiểu con trước khi cố thay đổi con", file: "hieu-con-truoc-khi-thay-doi" }
   ],
 
   /* ---------------------------------------------------------
