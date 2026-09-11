@@ -1051,12 +1051,11 @@
   background-color: #ffffff;
 }
 
-.doc-figure figcaption {
-  margin-top: 10px;
-  font-size: 13.5px;
-  color: #64748b;
-  font-style: italic;
-  line-height: 1.45;
+figcaption,
+.doc-figure figcaption,
+.doc-figure-side figcaption,
+.doc-media-row .doc-figure-side figcaption {
+  display: none !important;
 }
 
 @media (max-width: 768px) {

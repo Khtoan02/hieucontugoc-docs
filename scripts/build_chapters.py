@@ -362,8 +362,11 @@ def render_chapter_html(ch_num, cfg, raw_items):
                 info = IMG_MAPPING[img_key]
                 return f"""      <figure class="doc-figure">
         <img src="{info["src"]}" alt="" loading="lazy">
-        <figcaption>{info["caption"]}</figcaption>
       </figure>"""
+
+        # Ignore draft visual prompts/descriptions
+        if re.match(r'^\[(Visual|Infographic|Sơ đồ|Biểu đồ|Minh họa).*?\]', plain, re.IGNORECASE):
+            return None
               
         cleaned = clean_html_fragment(raw_text)
         
@@ -518,7 +521,6 @@ def render_chapter_html(ch_num, cfg, raw_items):
 
                 side_fig_html = f"""        <figure class="doc-figure doc-figure-side">
           <img src="{side_img_info["src"]}" alt="" loading="lazy">
-          <figcaption>{side_img_info["caption"]}</figcaption>
         </figure>"""
                 text_inner = []
                 for t, a, raw, p in items_before:
