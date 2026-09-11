@@ -331,6 +331,13 @@
         var parser = new DOMParser();
         var newDoc = parser.parseFromString(html, "text/html");
 
+        var newMain = newDoc.querySelector(".doc-cover, .doc-page");
+        if (!newMain) {
+          // Trang đích không dùng layout của chương tài liệu, chuyển hướng bình thường
+          window.location.href = targetUrl;
+          return;
+        }
+
         function updateDOM() {
           // Cập nhật tiêu đề trang
           document.title = newDoc.title;
@@ -344,7 +351,6 @@
 
           // Thay thế phần nội dung chính (.doc-cover hoặc .doc-page)
           var oldMain = document.querySelector(".doc-cover, .doc-page");
-          var newMain = newDoc.querySelector(".doc-cover, .doc-page");
           if (oldMain && newMain) {
             oldMain.replaceWith(newMain);
           }
@@ -400,14 +406,24 @@
       });
   }
 
+  /* Kiểm tra xem một đường dẫn có thuộc về một chương trong tài liệu hay không */
+  function isDocChapter(pathname) {
+    var rel = pathname.replace(docFolder, "").replace(/^\/+/, "").replace(/\.html$/, "");
+    if (!rel) rel = "index";
+    return pages.some(function (p) {
+      var pf = (p.file || "").replace(/\.html$/, "");
+      return pf === rel;
+    });
+  }
+
   /* Bắt sự kiện click vào các liên kết trong cùng tài liệu */
   document.addEventListener("click", function (e) {
     var link = e.target.closest("a");
     if (!link) return;
 
-    // Bỏ qua nếu là tab mới, tải về hoặc phím tắt đặc biệt
+    // Bỏ qua nếu là tab mới, tải về, nút tải hoặc có đánh dấu không dùng pjax
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    if (link.target === "_blank" || link.hasAttribute("download")) return;
+    if (link.target === "_blank" || link.hasAttribute("download") || link.hasAttribute("data-no-pjax") || link.classList.contains("btn-download")) return;
 
     var url = new URL(link.href, location.href);
 
@@ -417,9 +433,9 @@
     // Nếu cùng trang và có hash (#), để trình duyệt tự cuộn
     if (url.pathname === location.pathname && url.hash) return;
 
-    // Kiểm tra xem liên kết có thuộc về tài liệu hiện tại hay không
+    // Chỉ chặn và chuyển trang nội bộ nếu liên kết thực sự thuộc một chương trong tài liệu
     var targetFolder = getDocFolder(url.pathname);
-    if (targetFolder === docFolder) {
+    if (targetFolder === docFolder && isDocChapter(url.pathname)) {
       e.preventDefault();
       navigateDoc(link.href, false);
     }
@@ -428,10 +444,10 @@
   /* Tiền nạp tức thì khi rê chuột qua liên kết (0ms latency khi bấm) */
   document.addEventListener("mouseover", function (e) {
     var link = e.target.closest("a");
-    if (!link || link.target === "_blank") return;
+    if (!link || link.target === "_blank" || link.classList.contains("btn-download") || link.hasAttribute("data-no-pjax")) return;
     if (link.origin === location.origin) {
       var targetFolder = getDocFolder(link.pathname);
-      if (targetFolder === docFolder) {
+      if (targetFolder === docFolder && isDocChapter(link.pathname)) {
         preloadPage(link.href);
       }
     }
