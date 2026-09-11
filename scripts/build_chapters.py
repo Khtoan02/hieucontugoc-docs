@@ -374,7 +374,7 @@ def render_chapter_html(ch_num, cfg, raw_items):
             import urllib.parse
             doc_param = urllib.parse.quote(doc_name)
             return f"""      <div class="tool-action">
-        <a class="btn btn-download" data-no-pjax href="/giac-quan/nhan-tai-lieu.html?doc={doc_param}">
+        <a class="btn btn-download" data-no-pjax href="/nhan-tai-lieu?doc={doc_param}">
           <span>📄 {doc_name}</span>
         </a>
       </div>"""

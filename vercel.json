@@ -118,8 +118,8 @@
       "permanent": true
     },
     {
-      "source": "/nhan-tai-lieu",
-      "destination": "/giac-quan/nhan-tai-lieu",
+      "source": "/giac-quan/nhan-tai-lieu",
+      "destination": "/nhan-tai-lieu",
       "permanent": true
     },
     {
